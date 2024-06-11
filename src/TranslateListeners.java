@@ -10,122 +10,31 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
         FileUtils.writeToFile("print(", OUTPUT_FILE_PATH);
         FileUtils.writeToFile(String.valueOf(ctx.expr().getText()), OUTPUT_FILE_PATH);
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitPrint_stat(LatinoGrammarParser.Print_statContext ctx) {
         FileUtils.writeToFile(")", OUTPUT_FILE_PATH);
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterPrint_operations(LatinoGrammarParser.Print_operationsContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitPrint_operations(LatinoGrammarParser.Print_operationsContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterExpr(LatinoGrammarParser.ExprContext ctx) {
-    }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitExpr(LatinoGrammarParser.ExprContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterTerm(LatinoGrammarParser.TermContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitTerm(LatinoGrammarParser.TermContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterFactor(LatinoGrammarParser.FactorContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitFactor(LatinoGrammarParser.FactorContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterT_factor(LatinoGrammarParser.T_factorContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitT_factor(LatinoGrammarParser.T_factorContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterExpr_terminals(LatinoGrammarParser.Expr_terminalsContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitExpr_terminals(LatinoGrammarParser.Expr_terminalsContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterExpr_factor(LatinoGrammarParser.Expr_factorContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitExpr_factor(LatinoGrammarParser.Expr_factorContext ctx) { }
 
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterEveryRule(ParserRuleContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitEveryRule(ParserRuleContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void visitTerminal(TerminalNode node) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void visitErrorNode(ErrorNode node) { }
+    @Override public void enterExpr(LatinoGrammarParser.ExprContext ctx) {
+        FileUtils.writeToFile(ctx.expBool().getText(), OUTPUT_FILE_PATH);
+    }
+    @Override public void enterExprRest(LatinoGrammarParser.ExprRestContext ctx) {
+        if (ctx.expBool() != null) {
+            FileUtils.writeToFile("or", OUTPUT_FILE_PATH);
+
+        }
+    }
+
+    @Override public void enterExpBool(LatinoGrammarParser.ExpBoolContext ctx) {
+        FileUtils.writeToFile(ctx.expRel().getText(), OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterExpBoolRest(LatinoGrammarParser.ExpBoolRestContext ctx) {
+        if(ctx.expRel() != null){
+            FileUtils.writeToFile("and", OUTPUT_FILE_PATH);
+        }
+    }
+
+
 }
+

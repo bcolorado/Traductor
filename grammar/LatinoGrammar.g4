@@ -3,12 +3,19 @@ grammar LatinoGrammar;
 
 // REGLAS SINTACTICAS
 main_program:   substatement;
-substatement: print_stat | asign;
-asign: (ID)(assignmentOperator)(expr);
+substatement: print_stat | assign;
+assign: (ID)(assignmentOperator)(expr) | (ID)(assignAux)(expr);
+assignAux: (TKN_COMMA)(ID)(assignAux)(expr)(TKN_COMMA) | TKN_ASSIGN;
 assignmentOperator: TKN_DIV_ASSIGN | TKN_MOD_ASSIGN| TKN_PLUS_ASSIGN| TKN_MINUS_ASSIGN| TKN_TIMES_ASSIGN;
 print_stat: (print_operations)(TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR);
 print_operations: 'escribir' | 'imprimir' | 'poner';
-expr   :  term ( (TKN_PLUS | TKN_MINUS) term)*;
+expr: expBool exprRest;
+exprRest: TKN_OR expBool exprRest |;
+expBool: expRel expBoolRest;
+expBoolRest: TKN_AND expRel expBoolRest |;
+opRel: TKN_EQUAL | TKN_GEQ | TKN_GREATER | TKN_LEQ | TKN_LESS | TKN_NEQ;
+expRel: (expArit)(opRel)(expArit) | (expArit);
+expArit: term ( (TKN_PLUS | TKN_MINUS) term)*;
 term   :  factor ( (TKN_TIMES | TKN_DIV | TKN_MOD | TKN_CONCAT) factor)*;
 factor :  t_factor((TKN_POWER) t_factor)*;
 t_factor: (expr_factor)(expr_terminals);

@@ -5,8 +5,12 @@ import java.io.File;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-// create a CharStream that reads from standard input / file
-// create a lexer that feeds off of input CharStream
+        // Clear output.txt
+        String filePath = "output/output.txt";
+        FileUtils.clearFileContent(filePath);
+        // create a CharStream that reads from standard input / file
+
+    // create a lexer that feeds off of input CharStream
         LatinoGrammarLexer lexer;
 
         if (args.length>0)
@@ -17,7 +21,7 @@ public class Main {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
 // create a parser that feeds off the tokens buffer
         LatinoGrammarParser parser = new LatinoGrammarParser(tokens);
-        ParseTree tree = parser.print_stat(); // begin parsing at init rule
+        ParseTree tree = parser.main_program(); // begin parsing at init rule
 
         // Create a generic parse tree walker that can trigger callbacks
         ParseTreeWalker walker = new ParseTreeWalker();
