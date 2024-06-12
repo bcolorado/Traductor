@@ -220,6 +220,18 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExpAritOp(LatinoGrammarParser.ExpAritOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpAritOp(LatinoGrammarParser.ExpAritOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTerm(LatinoGrammarParser.TermContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -232,6 +244,18 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTermOp(LatinoGrammarParser.TermOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTermOp(LatinoGrammarParser.TermOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFactor(LatinoGrammarParser.FactorContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -239,6 +263,18 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFactor(LatinoGrammarParser.FactorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFactorOp(LatinoGrammarParser.FactorOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFactorOp(LatinoGrammarParser.FactorOpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

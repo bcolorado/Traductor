@@ -177,6 +177,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitExpArit(LatinoGrammarParser.ExpAritContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#expAritOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpAritOp(LatinoGrammarParser.ExpAritOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#expAritOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpAritOp(LatinoGrammarParser.ExpAritOpContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#term}.
 	 * @param ctx the parse tree
 	 */
@@ -187,6 +197,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitTerm(LatinoGrammarParser.TermContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#termOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterTermOp(LatinoGrammarParser.TermOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#termOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitTermOp(LatinoGrammarParser.TermOpContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#factor}.
 	 * @param ctx the parse tree
 	 */
@@ -196,6 +216,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFactor(LatinoGrammarParser.FactorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#factorOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterFactorOp(LatinoGrammarParser.FactorOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#factorOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitFactorOp(LatinoGrammarParser.FactorOpContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#t_factor}.
 	 * @param ctx the parse tree
