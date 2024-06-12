@@ -26,13 +26,13 @@ print_stat_cont: expr;
 print_operations: 'escribir' | 'imprimir' | 'poner';
 
 // FUNCIONES -------------------------------------------------------------------------------
-function_stat: function_op ID TKN_OPENING_PAR function_args TKN_CLOSING_PAR function_content function_ret 'fin';
+function_stat: function_op ID TKN_OPENING_PAR function_args TKN_CLOSING_PAR function_content 'fin';
 function_op: 'funcion' | 'fun';
 function_args: ID function_args_aux |;
 function_args_aux: TKN_COMMA ID function_args_aux | ;
 function_ret: function_ret_op expr;
 function_ret_op: 'retornar' | 'regresar' | 'ret';
-function_content: substatement;
+function_content: substatement function_ret;
 
 
 

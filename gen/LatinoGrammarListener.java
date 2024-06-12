@@ -167,6 +167,76 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitPrint_operations(LatinoGrammarParser.Print_operationsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_stat}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_stat(LatinoGrammarParser.Function_statContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#function_stat}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_stat(LatinoGrammarParser.Function_statContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_op}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_op(LatinoGrammarParser.Function_opContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#function_op}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_op(LatinoGrammarParser.Function_opContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_args}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_args(LatinoGrammarParser.Function_argsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#function_args}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_args(LatinoGrammarParser.Function_argsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_args_aux}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_args_aux(LatinoGrammarParser.Function_args_auxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#function_args_aux}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_args_aux(LatinoGrammarParser.Function_args_auxContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_ret}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_ret(LatinoGrammarParser.Function_retContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#function_ret}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_ret(LatinoGrammarParser.Function_retContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_ret_op}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_ret_op(LatinoGrammarParser.Function_ret_opContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#function_ret_op}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_ret_op(LatinoGrammarParser.Function_ret_opContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_content}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_content(LatinoGrammarParser.Function_contentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#function_content}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_content(LatinoGrammarParser.Function_contentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#expr}.
 	 * @param ctx the parse tree
 	 */

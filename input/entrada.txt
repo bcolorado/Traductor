@@ -1,13 +1,6 @@
 
 
 
-
-// Well done
-
-/* I dont´t have too many ideas **//*****/
-
-
-Don't forget to handle comments as well
-________-____________________-___________________-___________________
-
-*/
+funcion hola()
+  ret "Hola Mundo, Latinito!"
+fin

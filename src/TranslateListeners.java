@@ -84,6 +84,26 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
         FileUtils.writeToFile("+", OUTPUT_FILE_PATH);
     }
 
+    // FUNCIONES
+
+    @Override public void enterFunction_stat(LatinoGrammarParser.Function_statContext ctx) {
+        FileUtils.writeToFile("def ", OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(ctx.ID().getText(), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile("(", OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(ctx.function_args().getText(), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile("):\n", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterFunction_content(LatinoGrammarParser.Function_contentContext ctx) {
+        FileUtils.writeToFile("\t", OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(ctx.substatement().getText(), OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterFunction_ret(LatinoGrammarParser.Function_retContext ctx) {
+        FileUtils.writeToFile("return ", OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(ctx.expr().getText(), OUTPUT_FILE_PATH);
+    }
+
 
 
     // EXPRESIONES --------------------------------------------------------------
