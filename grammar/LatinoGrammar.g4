@@ -19,12 +19,15 @@ expArit: term ( (TKN_PLUS | TKN_MINUS) term)*;
 term   :  factor ( (TKN_TIMES | TKN_DIV | TKN_MOD | TKN_CONCAT) factor)*;
 factor :  t_factor((TKN_POWER) t_factor)*;
 t_factor: (expr_factor)(expr_terminals);
-expr_terminals: NUM | ID | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR);
+expr_terminals: NUM | ID | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR) | STRING;
 expr_factor: (TKN_MINUS | TKN_PLUS | TKN_NOT)* ;
 
 
 
 // TOKENS
+STRING : '"' ( ~["\\] | '\\' . )* '"'
+       | '\'' ( ~['\\] | '\\' . )* '\''
+       ;
 TKN_AND         : '&&';
 TKN_OR          : '||';
 TKN_CONCAT      : '..';
