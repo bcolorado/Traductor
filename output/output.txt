@@ -1,1 +1,7 @@
-x+=(5+(8+7*8)) or (1 and 2)
+print("Greetings")
+x=str(3)
+y=int("1245")^2*int('12'+"67")
+print(y-x)
+z,d=(x/y),2%3
+a,b,_,c=(123*2)^14,1/1+2,1*int("12"+"13"+'1'),bool("verdadero")
+a,b,c=c,b,d

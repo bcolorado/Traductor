@@ -3,19 +3,26 @@ grammar LatinoGrammar;
 
 // REGLAS SINTACTICAS
 main_program:   substatement;
-substatement: print_stat | assign |;
+substatement: print_stat substatement | assign substatement | built_in_functions substatement |;
 
 // ASIGNACIÓN -------------------------------------------------------------------------------
-assign: ID assignmentOperator expr substatement | ID assignAux expr substatement |;
+assign: ID assignmentOperator expr | ID assignAux expr | ID assignIncrDecr ;
 assignAux: (TKN_COMMA)(ID)(assignAux)(expr)(TKN_COMMA) | TKN_ASSIGN;
 assignmentOperator: TKN_DIV_ASSIGN | TKN_MOD_ASSIGN| TKN_PLUS_ASSIGN| TKN_MINUS_ASSIGN| TKN_TIMES_ASSIGN;
 assignIncrDecr: TKN_INCREMENT | TKN_DECREMENT;
 
+// FUNCIONES BUILT-IN ---------------------------------------------------------------------
+built_in_functions:
+     incluir_stat | leer_stat | limpiar_stat ;
+acadena_stat: 'acadena' TKN_OPENING_PAR expArit TKN_CLOSING_PAR;
+incluir_stat: 'incluir' TKN_OPENING_PAR TKN_CLOSING_PAR;
+leer_stat: 'leer' TKN_OPENING_PAR TKN_CLOSING_PAR ;
+limpiar_stat: 'limpiar' TKN_OPENING_PAR TKN_CLOSING_PAR ;
+alogico_stat: 'alogico' TKN_OPENING_PAR expr TKN_CLOSING_PAR;
+anumero_stat: 'anumero' TKN_OPENING_PAR expr TKN_CLOSING_PAR;
 // IMPRESIÓN -------------------------------------------------------------------------------
-print_stat: print_operations TKN_OPENING_PAR print_stat_cont TKN_CLOSING_PAR substatement;
-print_stat_cont: expr | print_concat_string;
-print_concat_string: STRING print_concat_string_aux| ;
-print_concat_string_aux: TKN_CONCAT STRING print_concat_string_aux | ;
+print_stat: print_operations TKN_OPENING_PAR print_stat_cont TKN_CLOSING_PAR;
+print_stat_cont: expr;
 print_operations: 'escribir' | 'imprimir' | 'poner';
 
 // EXPRESIONES -----------------------------------------------------------------------------
@@ -24,7 +31,9 @@ exprRest: TKN_OR expBool exprRest |;
 expBool: expRel expBoolRest;
 expBoolRest: TKN_AND expRel expBoolRest |;
 opRel: TKN_EQUAL | TKN_GEQ | TKN_GREATER | TKN_LEQ | TKN_LESS | TKN_NEQ;
-expRel: (expArit)(opRel)(expArit) | (expArit);
+expRel: (exprConcat)(opRel)(exprConcat) | (exprConcat);
+exprConcat: expArit (exprConcatOp expArit)*;
+exprConcatOp: TKN_CONCAT;
 expArit: term (expAritOp term)*;
 expAritOp: TKN_PLUS | TKN_MINUS;
 term   :  factor (termOp factor)*;
@@ -32,7 +41,7 @@ termOp: TKN_TIMES | TKN_DIV | TKN_MOD;
 factor :  t_factor(factorOp t_factor)*;
 factorOp: TKN_POWER;
 t_factor: (expr_factor)(expr_terminals);
-expr_terminals: NUM | ID | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR) | STRING;
+expr_terminals: NUM | ID | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR) | STRING | anumero_stat | alogico_stat | acadena_stat;
 expr_factor: (TKN_MINUS | TKN_PLUS | TKN_NOT)* ;
 
 
