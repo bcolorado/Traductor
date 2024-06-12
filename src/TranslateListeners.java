@@ -34,12 +34,26 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
 
     @Override public void enterPrint_stat(LatinoGrammarParser.Print_statContext ctx) {
         FileUtils.writeToFile("print(", OUTPUT_FILE_PATH);
-        FileUtils.writeToFile(String.valueOf(ctx.expr().getText()), OUTPUT_FILE_PATH);
     }
 
-    @Override public void exitPrint_stat(LatinoGrammarParser.Print_statContext ctx) {
-        FileUtils.writeToFile(")", OUTPUT_FILE_PATH);
+    @Override public void exitPrint_stat_cont(LatinoGrammarParser.Print_stat_contContext ctx) {
+        FileUtils.writeToFile(")\n", OUTPUT_FILE_PATH);
     }
+
+    @Override public void enterPrint_concat_string(LatinoGrammarParser.Print_concat_stringContext ctx) {
+        FileUtils.writeToFile(ctx.STRING().getText(), OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterPrint_concat_string_aux(LatinoGrammarParser.Print_concat_string_auxContext ctx) {
+        if (ctx.TKN_CONCAT() != null) {
+            FileUtils.writeToFile("+", OUTPUT_FILE_PATH);
+            FileUtils.writeToFile(ctx.STRING().getText(), OUTPUT_FILE_PATH);
+        }
+
+    }
+
+
+
 
     @Override public void enterExpRel(LatinoGrammarParser.ExpRelContext ctx) {
         FileUtils.writeToFile(ctx.getText(), OUTPUT_FILE_PATH);

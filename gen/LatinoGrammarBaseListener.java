@@ -88,6 +88,42 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPrint_stat_cont(LatinoGrammarParser.Print_stat_contContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrint_stat_cont(LatinoGrammarParser.Print_stat_contContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrint_concat_string(LatinoGrammarParser.Print_concat_stringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrint_concat_string(LatinoGrammarParser.Print_concat_stringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrint_concat_string_aux(LatinoGrammarParser.Print_concat_string_auxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrint_concat_string_aux(LatinoGrammarParser.Print_concat_string_auxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPrint_operations(LatinoGrammarParser.Print_operationsContext ctx) { }
 	/**
 	 * {@inheritDoc}

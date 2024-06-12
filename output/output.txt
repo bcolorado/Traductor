@@ -1,1 +1,2 @@
-x+=(5+(8+7*8))5+(8+7*8)8+7*8
+print("Greetings")
+print(y-x)

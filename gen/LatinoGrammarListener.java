@@ -67,6 +67,36 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitPrint_stat(LatinoGrammarParser.Print_statContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#print_stat_cont}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrint_stat_cont(LatinoGrammarParser.Print_stat_contContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#print_stat_cont}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrint_stat_cont(LatinoGrammarParser.Print_stat_contContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#print_concat_string}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrint_concat_string(LatinoGrammarParser.Print_concat_stringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#print_concat_string}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrint_concat_string(LatinoGrammarParser.Print_concat_stringContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#print_concat_string_aux}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrint_concat_string_aux(LatinoGrammarParser.Print_concat_string_auxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#print_concat_string_aux}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrint_concat_string_aux(LatinoGrammarParser.Print_concat_string_auxContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#print_operations}.
 	 * @param ctx the parse tree
 	 */

@@ -16,25 +16,27 @@ public class LatinoGrammarParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, TKN_AND=4, TKN_OR=5, TKN_CONCAT=6, TKN_PERIOD=7, 
-		TKN_COMMA=8, TKN_SEMICOLON=9, TKN_COLON=10, TKN_OPENING_KEY=11, TKN_CLOSING_KEY=12, 
-		TKN_OPENING_BRA=13, TKN_CLOSING_BRA=14, TKN_OPENING_PAR=15, TKN_CLOSING_PAR=16, 
-		TKN_INCREMENT=17, TKN_DECREMENT=18, TKN_MOD_ASSIGN=19, TKN_DIV_ASSIGN=20, 
-		TKN_TIMES_ASSIGN=21, TKN_MINUS_ASSIGN=22, TKN_PLUS_ASSIGN=23, TKN_PLUS=24, 
-		TKN_MINUS=25, TKN_TIMES=26, TKN_DIV=27, TKN_POWER=28, TKN_MOD=29, TKN_EQUAL=30, 
-		TKN_NEQ=31, TKN_LEQ=32, TKN_GEQ=33, TKN_GREATER=34, TKN_LESS=35, TKN_REGEX=36, 
-		TKN_ASSIGN=37, TKN_NOT=38, NUM=39, ID=40, ESPACIO=41;
+		T__0=1, T__1=2, T__2=3, STRING=4, TKN_AND=5, TKN_OR=6, TKN_CONCAT=7, TKN_PERIOD=8, 
+		TKN_COMMA=9, TKN_SEMICOLON=10, TKN_COLON=11, TKN_OPENING_KEY=12, TKN_CLOSING_KEY=13, 
+		TKN_OPENING_BRA=14, TKN_CLOSING_BRA=15, TKN_OPENING_PAR=16, TKN_CLOSING_PAR=17, 
+		TKN_INCREMENT=18, TKN_DECREMENT=19, TKN_MOD_ASSIGN=20, TKN_DIV_ASSIGN=21, 
+		TKN_TIMES_ASSIGN=22, TKN_MINUS_ASSIGN=23, TKN_PLUS_ASSIGN=24, TKN_PLUS=25, 
+		TKN_MINUS=26, TKN_TIMES=27, TKN_DIV=28, TKN_POWER=29, TKN_MOD=30, TKN_EQUAL=31, 
+		TKN_NEQ=32, TKN_LEQ=33, TKN_GEQ=34, TKN_GREATER=35, TKN_LESS=36, TKN_REGEX=37, 
+		TKN_ASSIGN=38, TKN_NOT=39, NUM=40, ID=41, ESPACIO=42;
 	public static final int
 		RULE_main_program = 0, RULE_substatement = 1, RULE_assign = 2, RULE_assignAux = 3, 
-		RULE_assignmentOperator = 4, RULE_print_stat = 5, RULE_print_operations = 6, 
-		RULE_expr = 7, RULE_exprRest = 8, RULE_expBool = 9, RULE_expBoolRest = 10, 
-		RULE_opRel = 11, RULE_expRel = 12, RULE_expArit = 13, RULE_term = 14, 
-		RULE_factor = 15, RULE_t_factor = 16, RULE_expr_terminals = 17, RULE_expr_factor = 18;
+		RULE_assignmentOperator = 4, RULE_print_stat = 5, RULE_print_stat_cont = 6, 
+		RULE_print_concat_string = 7, RULE_print_concat_string_aux = 8, RULE_print_operations = 9, 
+		RULE_expr = 10, RULE_exprRest = 11, RULE_expBool = 12, RULE_expBoolRest = 13, 
+		RULE_opRel = 14, RULE_expRel = 15, RULE_expArit = 16, RULE_term = 17, 
+		RULE_factor = 18, RULE_t_factor = 19, RULE_expr_terminals = 20, RULE_expr_factor = 21;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"main_program", "substatement", "assign", "assignAux", "assignmentOperator", 
-			"print_stat", "print_operations", "expr", "exprRest", "expBool", "expBoolRest", 
-			"opRel", "expRel", "expArit", "term", "factor", "t_factor", "expr_terminals", 
+			"print_stat", "print_stat_cont", "print_concat_string", "print_concat_string_aux", 
+			"print_operations", "expr", "exprRest", "expBool", "expBoolRest", "opRel", 
+			"expRel", "expArit", "term", "factor", "t_factor", "expr_terminals", 
 			"expr_factor"
 		};
 	}
@@ -42,7 +44,7 @@ public class LatinoGrammarParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'escribir'", "'imprimir'", "'poner'", "'&&'", "'||'", "'..'", 
+			null, "'escribir'", "'imprimir'", "'poner'", null, "'&&'", "'||'", "'..'", 
 			"'.'", "','", "';'", "':'", "'{'", "'}'", "'['", "']'", "'('", "')'", 
 			"'++'", "'--'", "'%='", "'/='", "'*='", "'-='", "'+='", "'+'", "'-'", 
 			"'*'", "'/'", "'^'", "'%'", "'=='", "'!='", "'<='", "'>='", "'>'", "'<'", 
@@ -52,14 +54,14 @@ public class LatinoGrammarParser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, "TKN_AND", "TKN_OR", "TKN_CONCAT", "TKN_PERIOD", 
-			"TKN_COMMA", "TKN_SEMICOLON", "TKN_COLON", "TKN_OPENING_KEY", "TKN_CLOSING_KEY", 
-			"TKN_OPENING_BRA", "TKN_CLOSING_BRA", "TKN_OPENING_PAR", "TKN_CLOSING_PAR", 
-			"TKN_INCREMENT", "TKN_DECREMENT", "TKN_MOD_ASSIGN", "TKN_DIV_ASSIGN", 
-			"TKN_TIMES_ASSIGN", "TKN_MINUS_ASSIGN", "TKN_PLUS_ASSIGN", "TKN_PLUS", 
-			"TKN_MINUS", "TKN_TIMES", "TKN_DIV", "TKN_POWER", "TKN_MOD", "TKN_EQUAL", 
-			"TKN_NEQ", "TKN_LEQ", "TKN_GEQ", "TKN_GREATER", "TKN_LESS", "TKN_REGEX", 
-			"TKN_ASSIGN", "TKN_NOT", "NUM", "ID", "ESPACIO"
+			null, null, null, null, "STRING", "TKN_AND", "TKN_OR", "TKN_CONCAT", 
+			"TKN_PERIOD", "TKN_COMMA", "TKN_SEMICOLON", "TKN_COLON", "TKN_OPENING_KEY", 
+			"TKN_CLOSING_KEY", "TKN_OPENING_BRA", "TKN_CLOSING_BRA", "TKN_OPENING_PAR", 
+			"TKN_CLOSING_PAR", "TKN_INCREMENT", "TKN_DECREMENT", "TKN_MOD_ASSIGN", 
+			"TKN_DIV_ASSIGN", "TKN_TIMES_ASSIGN", "TKN_MINUS_ASSIGN", "TKN_PLUS_ASSIGN", 
+			"TKN_PLUS", "TKN_MINUS", "TKN_TIMES", "TKN_DIV", "TKN_POWER", "TKN_MOD", 
+			"TKN_EQUAL", "TKN_NEQ", "TKN_LEQ", "TKN_GEQ", "TKN_GREATER", "TKN_LESS", 
+			"TKN_REGEX", "TKN_ASSIGN", "TKN_NOT", "NUM", "ID", "ESPACIO"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -138,7 +140,7 @@ public class LatinoGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(38);
+			setState(44);
 			substatement();
 			}
 		}
@@ -179,7 +181,7 @@ public class LatinoGrammarParser extends Parser {
 		SubstatementContext _localctx = new SubstatementContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_substatement);
 		try {
-			setState(42);
+			setState(49);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__0:
@@ -187,15 +189,20 @@ public class LatinoGrammarParser extends Parser {
 			case T__2:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(40);
+				setState(46);
 				print_stat();
 				}
 				break;
 			case ID:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(41);
+				setState(47);
 				assign();
+				}
+				break;
+			case EOF:
+				enterOuterAlt(_localctx, 3);
+				{
 				}
 				break;
 			default:
@@ -222,6 +229,9 @@ public class LatinoGrammarParser extends Parser {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
+		public SubstatementContext substatement() {
+			return getRuleContext(SubstatementContext.class,0);
+		}
 		public AssignAuxContext assignAux() {
 			return getRuleContext(AssignAuxContext.class,0);
 		}
@@ -243,41 +253,33 @@ public class LatinoGrammarParser extends Parser {
 		AssignContext _localctx = new AssignContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_assign);
 		try {
-			setState(52);
+			setState(61);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				{
-				setState(44);
+				setState(51);
 				match(ID);
-				}
-				{
-				setState(45);
+				setState(52);
 				assignmentOperator();
-				}
-				{
-				setState(46);
+				setState(53);
 				expr();
-				}
+				setState(54);
+				substatement();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				{
-				setState(48);
+				setState(56);
 				match(ID);
-				}
-				{
-				setState(49);
+				setState(57);
 				assignAux();
-				}
-				{
-				setState(50);
+				setState(58);
 				expr();
-				}
+				setState(59);
+				substatement();
 				}
 				break;
 			}
@@ -325,30 +327,30 @@ public class LatinoGrammarParser extends Parser {
 		AssignAuxContext _localctx = new AssignAuxContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_assignAux);
 		try {
-			setState(61);
+			setState(70);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TKN_COMMA:
 				enterOuterAlt(_localctx, 1);
 				{
 				{
-				setState(54);
+				setState(63);
 				match(TKN_COMMA);
 				}
 				{
-				setState(55);
+				setState(64);
 				match(ID);
 				}
 				{
-				setState(56);
+				setState(65);
 				assignAux();
 				}
 				{
-				setState(57);
+				setState(66);
 				expr();
 				}
 				{
-				setState(58);
+				setState(67);
 				match(TKN_COMMA);
 				}
 				}
@@ -356,7 +358,7 @@ public class LatinoGrammarParser extends Parser {
 			case TKN_ASSIGN:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(60);
+				setState(69);
 				match(TKN_ASSIGN);
 				}
 				break;
@@ -403,9 +405,9 @@ public class LatinoGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(63);
+			setState(72);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 16252928L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 32505856L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -432,10 +434,13 @@ public class LatinoGrammarParser extends Parser {
 			return getRuleContext(Print_operationsContext.class,0);
 		}
 		public TerminalNode TKN_OPENING_PAR() { return getToken(LatinoGrammarParser.TKN_OPENING_PAR, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
+		public Print_stat_contContext print_stat_cont() {
+			return getRuleContext(Print_stat_contContext.class,0);
 		}
 		public TerminalNode TKN_CLOSING_PAR() { return getToken(LatinoGrammarParser.TKN_CLOSING_PAR, 0); }
+		public SubstatementContext substatement() {
+			return getRuleContext(SubstatementContext.class,0);
+		}
 		public Print_statContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -456,22 +461,187 @@ public class LatinoGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			{
-			setState(65);
+			setState(74);
 			print_operations();
-			}
-			{
-			setState(66);
+			setState(75);
 			match(TKN_OPENING_PAR);
-			}
-			{
-			setState(67);
-			expr();
-			}
-			{
-			setState(68);
+			setState(76);
+			print_stat_cont();
+			setState(77);
 			match(TKN_CLOSING_PAR);
+			setState(78);
+			substatement();
 			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Print_stat_contContext extends ParserRuleContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public Print_concat_stringContext print_concat_string() {
+			return getRuleContext(Print_concat_stringContext.class,0);
+		}
+		public Print_stat_contContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_print_stat_cont; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LatinoGrammarListener ) ((LatinoGrammarListener)listener).enterPrint_stat_cont(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LatinoGrammarListener ) ((LatinoGrammarListener)listener).exitPrint_stat_cont(this);
+		}
+	}
+
+	public final Print_stat_contContext print_stat_cont() throws RecognitionException {
+		Print_stat_contContext _localctx = new Print_stat_contContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_print_stat_cont);
+		try {
+			setState(82);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(80);
+				expr();
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(81);
+				print_concat_string();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Print_concat_stringContext extends ParserRuleContext {
+		public TerminalNode STRING() { return getToken(LatinoGrammarParser.STRING, 0); }
+		public Print_concat_string_auxContext print_concat_string_aux() {
+			return getRuleContext(Print_concat_string_auxContext.class,0);
+		}
+		public Print_concat_stringContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_print_concat_string; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LatinoGrammarListener ) ((LatinoGrammarListener)listener).enterPrint_concat_string(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LatinoGrammarListener ) ((LatinoGrammarListener)listener).exitPrint_concat_string(this);
+		}
+	}
+
+	public final Print_concat_stringContext print_concat_string() throws RecognitionException {
+		Print_concat_stringContext _localctx = new Print_concat_stringContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_print_concat_string);
+		try {
+			setState(87);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case STRING:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(84);
+				match(STRING);
+				setState(85);
+				print_concat_string_aux();
+				}
+				break;
+			case TKN_CLOSING_PAR:
+				enterOuterAlt(_localctx, 2);
+				{
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Print_concat_string_auxContext extends ParserRuleContext {
+		public TerminalNode TKN_CONCAT() { return getToken(LatinoGrammarParser.TKN_CONCAT, 0); }
+		public TerminalNode STRING() { return getToken(LatinoGrammarParser.STRING, 0); }
+		public Print_concat_string_auxContext print_concat_string_aux() {
+			return getRuleContext(Print_concat_string_auxContext.class,0);
+		}
+		public Print_concat_string_auxContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_print_concat_string_aux; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LatinoGrammarListener ) ((LatinoGrammarListener)listener).enterPrint_concat_string_aux(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LatinoGrammarListener ) ((LatinoGrammarListener)listener).exitPrint_concat_string_aux(this);
+		}
+	}
+
+	public final Print_concat_string_auxContext print_concat_string_aux() throws RecognitionException {
+		Print_concat_string_auxContext _localctx = new Print_concat_string_auxContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_print_concat_string_aux);
+		try {
+			setState(93);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case TKN_CONCAT:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(89);
+				match(TKN_CONCAT);
+				setState(90);
+				match(STRING);
+				setState(91);
+				print_concat_string_aux();
+				}
+				break;
+			case TKN_CLOSING_PAR:
+				enterOuterAlt(_localctx, 2);
+				{
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -503,12 +673,12 @@ public class LatinoGrammarParser extends Parser {
 
 	public final Print_operationsContext print_operations() throws RecognitionException {
 		Print_operationsContext _localctx = new Print_operationsContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_print_operations);
+		enterRule(_localctx, 18, RULE_print_operations);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(70);
+			setState(95);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 14L) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -555,13 +725,13 @@ public class LatinoGrammarParser extends Parser {
 
 	public final ExprContext expr() throws RecognitionException {
 		ExprContext _localctx = new ExprContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_expr);
+		enterRule(_localctx, 20, RULE_expr);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(72);
+			setState(97);
 			expBool();
-			setState(73);
+			setState(98);
 			exprRest();
 			}
 		}
@@ -601,25 +771,29 @@ public class LatinoGrammarParser extends Parser {
 
 	public final ExprRestContext exprRest() throws RecognitionException {
 		ExprRestContext _localctx = new ExprRestContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_exprRest);
+		enterRule(_localctx, 22, RULE_exprRest);
 		try {
-			setState(80);
+			setState(105);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TKN_OR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(75);
+				setState(100);
 				match(TKN_OR);
-				setState(76);
+				setState(101);
 				expBool();
-				setState(77);
+				setState(102);
 				exprRest();
 				}
 				break;
 			case EOF:
+			case T__0:
+			case T__1:
+			case T__2:
 			case TKN_COMMA:
 			case TKN_CLOSING_PAR:
+			case ID:
 				enterOuterAlt(_localctx, 2);
 				{
 				}
@@ -663,13 +837,13 @@ public class LatinoGrammarParser extends Parser {
 
 	public final ExpBoolContext expBool() throws RecognitionException {
 		ExpBoolContext _localctx = new ExpBoolContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_expBool);
+		enterRule(_localctx, 24, RULE_expBool);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(82);
+			setState(107);
 			expRel();
-			setState(83);
+			setState(108);
 			expBoolRest();
 			}
 		}
@@ -709,26 +883,30 @@ public class LatinoGrammarParser extends Parser {
 
 	public final ExpBoolRestContext expBoolRest() throws RecognitionException {
 		ExpBoolRestContext _localctx = new ExpBoolRestContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_expBoolRest);
+		enterRule(_localctx, 26, RULE_expBoolRest);
 		try {
-			setState(90);
+			setState(115);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TKN_AND:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(85);
+				setState(110);
 				match(TKN_AND);
-				setState(86);
+				setState(111);
 				expRel();
-				setState(87);
+				setState(112);
 				expBoolRest();
 				}
 				break;
 			case EOF:
+			case T__0:
+			case T__1:
+			case T__2:
 			case TKN_OR:
 			case TKN_COMMA:
 			case TKN_CLOSING_PAR:
+			case ID:
 				enterOuterAlt(_localctx, 2);
 				{
 				}
@@ -772,14 +950,14 @@ public class LatinoGrammarParser extends Parser {
 
 	public final OpRelContext opRel() throws RecognitionException {
 		OpRelContext _localctx = new OpRelContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_opRel);
+		enterRule(_localctx, 28, RULE_opRel);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92);
+			setState(117);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 67645734912L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 135291469824L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -827,24 +1005,24 @@ public class LatinoGrammarParser extends Parser {
 
 	public final ExpRelContext expRel() throws RecognitionException {
 		ExpRelContext _localctx = new ExpRelContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_expRel);
+		enterRule(_localctx, 30, RULE_expRel);
 		try {
-			setState(99);
+			setState(124);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
 				{
-				setState(94);
+				setState(119);
 				expArit();
 				}
 				{
-				setState(95);
+				setState(120);
 				opRel();
 				}
 				{
-				setState(96);
+				setState(121);
 				expArit();
 				}
 				}
@@ -853,7 +1031,7 @@ public class LatinoGrammarParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				{
-				setState(98);
+				setState(123);
 				expArit();
 				}
 				}
@@ -903,20 +1081,20 @@ public class LatinoGrammarParser extends Parser {
 
 	public final ExpAritContext expArit() throws RecognitionException {
 		ExpAritContext _localctx = new ExpAritContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_expArit);
+		enterRule(_localctx, 32, RULE_expArit);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(101);
+			setState(126);
 			term();
-			setState(106);
+			setState(131);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==TKN_PLUS || _la==TKN_MINUS) {
 				{
 				{
-				setState(102);
+				setState(127);
 				_la = _input.LA(1);
 				if ( !(_la==TKN_PLUS || _la==TKN_MINUS) ) {
 				_errHandler.recoverInline(this);
@@ -926,11 +1104,11 @@ public class LatinoGrammarParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(103);
+				setState(128);
 				term();
 				}
 				}
-				setState(108);
+				setState(133);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -967,10 +1145,6 @@ public class LatinoGrammarParser extends Parser {
 		public TerminalNode TKN_MOD(int i) {
 			return getToken(LatinoGrammarParser.TKN_MOD, i);
 		}
-		public List<TerminalNode> TKN_CONCAT() { return getTokens(LatinoGrammarParser.TKN_CONCAT); }
-		public TerminalNode TKN_CONCAT(int i) {
-			return getToken(LatinoGrammarParser.TKN_CONCAT, i);
-		}
 		public TermContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -987,22 +1161,22 @@ public class LatinoGrammarParser extends Parser {
 
 	public final TermContext term() throws RecognitionException {
 		TermContext _localctx = new TermContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_term);
+		enterRule(_localctx, 34, RULE_term);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(109);
+			setState(134);
 			factor();
-			setState(114);
+			setState(139);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 738197568L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1476395008L) != 0)) {
 				{
 				{
-				setState(110);
+				setState(135);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 738197568L) != 0)) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1476395008L) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1010,11 +1184,11 @@ public class LatinoGrammarParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(111);
+				setState(136);
 				factor();
 				}
 				}
-				setState(116);
+				setState(141);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1059,28 +1233,28 @@ public class LatinoGrammarParser extends Parser {
 
 	public final FactorContext factor() throws RecognitionException {
 		FactorContext _localctx = new FactorContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_factor);
+		enterRule(_localctx, 36, RULE_factor);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(117);
+			setState(142);
 			t_factor();
-			setState(122);
+			setState(147);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==TKN_POWER) {
 				{
 				{
 				{
-				setState(118);
+				setState(143);
 				match(TKN_POWER);
 				}
-				setState(119);
+				setState(144);
 				t_factor();
 				}
 				}
-				setState(124);
+				setState(149);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1121,16 +1295,16 @@ public class LatinoGrammarParser extends Parser {
 
 	public final T_factorContext t_factor() throws RecognitionException {
 		T_factorContext _localctx = new T_factorContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_t_factor);
+		enterRule(_localctx, 38, RULE_t_factor);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(125);
+			setState(150);
 			expr_factor();
 			}
 			{
-			setState(126);
+			setState(151);
 			expr_terminals();
 			}
 			}
@@ -1155,6 +1329,7 @@ public class LatinoGrammarParser extends Parser {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public TerminalNode TKN_CLOSING_PAR() { return getToken(LatinoGrammarParser.TKN_CLOSING_PAR, 0); }
+		public TerminalNode STRING() { return getToken(LatinoGrammarParser.STRING, 0); }
 		public Expr_terminalsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1171,22 +1346,22 @@ public class LatinoGrammarParser extends Parser {
 
 	public final Expr_terminalsContext expr_terminals() throws RecognitionException {
 		Expr_terminalsContext _localctx = new Expr_terminalsContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_expr_terminals);
+		enterRule(_localctx, 40, RULE_expr_terminals);
 		try {
-			setState(134);
+			setState(160);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NUM:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(128);
+				setState(153);
 				match(NUM);
 				}
 				break;
 			case ID:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(129);
+				setState(154);
 				match(ID);
 				}
 				break;
@@ -1194,17 +1369,24 @@ public class LatinoGrammarParser extends Parser {
 				enterOuterAlt(_localctx, 3);
 				{
 				{
-				setState(130);
+				setState(155);
 				match(TKN_OPENING_PAR);
 				}
 				{
-				setState(131);
+				setState(156);
 				expr();
 				}
 				{
-				setState(132);
+				setState(157);
 				match(TKN_CLOSING_PAR);
 				}
+				}
+				break;
+			case STRING:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(159);
+				match(STRING);
 				}
 				break;
 			default:
@@ -1252,20 +1434,20 @@ public class LatinoGrammarParser extends Parser {
 
 	public final Expr_factorContext expr_factor() throws RecognitionException {
 		Expr_factorContext _localctx = new Expr_factorContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_expr_factor);
+		enterRule(_localctx, 42, RULE_expr_factor);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(139);
+			setState(165);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 274928238592L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 549856477184L) != 0)) {
 				{
 				{
-				setState(136);
+				setState(162);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 274928238592L) != 0)) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 549856477184L) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1275,7 +1457,7 @@ public class LatinoGrammarParser extends Parser {
 				}
 				}
 				}
-				setState(141);
+				setState(167);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1293,84 +1475,103 @@ public class LatinoGrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001)\u008f\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001*\u00a9\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
 		"\f\u0007\f\u0002\r\u0007\r\u0002\u000e\u0007\u000e\u0002\u000f\u0007\u000f"+
 		"\u0002\u0010\u0007\u0010\u0002\u0011\u0007\u0011\u0002\u0012\u0007\u0012"+
-		"\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0003\u0001+\b\u0001"+
-		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
-		"\u0001\u0002\u0001\u0002\u0003\u00025\b\u0002\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0003\u0003"+
-		">\b\u0003\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005\u0001\u0005"+
-		"\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0007\u0001\u0007"+
-		"\u0001\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0003\bQ\b\b\u0001"+
-		"\t\u0001\t\u0001\t\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0003\n[\b"+
-		"\n\u0001\u000b\u0001\u000b\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0003"+
-		"\fd\b\f\u0001\r\u0001\r\u0001\r\u0005\ri\b\r\n\r\f\rl\t\r\u0001\u000e"+
-		"\u0001\u000e\u0001\u000e\u0005\u000eq\b\u000e\n\u000e\f\u000et\t\u000e"+
-		"\u0001\u000f\u0001\u000f\u0001\u000f\u0005\u000fy\b\u000f\n\u000f\f\u000f"+
-		"|\t\u000f\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0011\u0001\u0011"+
-		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0003\u0011\u0087\b\u0011"+
-		"\u0001\u0012\u0005\u0012\u008a\b\u0012\n\u0012\f\u0012\u008d\t\u0012\u0001"+
-		"\u0012\u0000\u0000\u0013\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012"+
-		"\u0014\u0016\u0018\u001a\u001c\u001e \"$\u0000\u0006\u0001\u0000\u0013"+
-		"\u0017\u0001\u0000\u0001\u0003\u0001\u0000\u001e#\u0001\u0000\u0018\u0019"+
-		"\u0003\u0000\u0006\u0006\u001a\u001b\u001d\u001d\u0002\u0000\u0018\u0019"+
-		"&&\u0087\u0000&\u0001\u0000\u0000\u0000\u0002*\u0001\u0000\u0000\u0000"+
-		"\u00044\u0001\u0000\u0000\u0000\u0006=\u0001\u0000\u0000\u0000\b?\u0001"+
-		"\u0000\u0000\u0000\nA\u0001\u0000\u0000\u0000\fF\u0001\u0000\u0000\u0000"+
-		"\u000eH\u0001\u0000\u0000\u0000\u0010P\u0001\u0000\u0000\u0000\u0012R"+
-		"\u0001\u0000\u0000\u0000\u0014Z\u0001\u0000\u0000\u0000\u0016\\\u0001"+
-		"\u0000\u0000\u0000\u0018c\u0001\u0000\u0000\u0000\u001ae\u0001\u0000\u0000"+
-		"\u0000\u001cm\u0001\u0000\u0000\u0000\u001eu\u0001\u0000\u0000\u0000 "+
-		"}\u0001\u0000\u0000\u0000\"\u0086\u0001\u0000\u0000\u0000$\u008b\u0001"+
-		"\u0000\u0000\u0000&\'\u0003\u0002\u0001\u0000\'\u0001\u0001\u0000\u0000"+
-		"\u0000(+\u0003\n\u0005\u0000)+\u0003\u0004\u0002\u0000*(\u0001\u0000\u0000"+
-		"\u0000*)\u0001\u0000\u0000\u0000+\u0003\u0001\u0000\u0000\u0000,-\u0005"+
-		"(\u0000\u0000-.\u0003\b\u0004\u0000./\u0003\u000e\u0007\u0000/5\u0001"+
-		"\u0000\u0000\u000001\u0005(\u0000\u000012\u0003\u0006\u0003\u000023\u0003"+
-		"\u000e\u0007\u000035\u0001\u0000\u0000\u00004,\u0001\u0000\u0000\u0000"+
-		"40\u0001\u0000\u0000\u00005\u0005\u0001\u0000\u0000\u000067\u0005\b\u0000"+
-		"\u000078\u0005(\u0000\u000089\u0003\u0006\u0003\u00009:\u0003\u000e\u0007"+
-		"\u0000:;\u0005\b\u0000\u0000;>\u0001\u0000\u0000\u0000<>\u0005%\u0000"+
-		"\u0000=6\u0001\u0000\u0000\u0000=<\u0001\u0000\u0000\u0000>\u0007\u0001"+
-		"\u0000\u0000\u0000?@\u0007\u0000\u0000\u0000@\t\u0001\u0000\u0000\u0000"+
-		"AB\u0003\f\u0006\u0000BC\u0005\u000f\u0000\u0000CD\u0003\u000e\u0007\u0000"+
-		"DE\u0005\u0010\u0000\u0000E\u000b\u0001\u0000\u0000\u0000FG\u0007\u0001"+
-		"\u0000\u0000G\r\u0001\u0000\u0000\u0000HI\u0003\u0012\t\u0000IJ\u0003"+
-		"\u0010\b\u0000J\u000f\u0001\u0000\u0000\u0000KL\u0005\u0005\u0000\u0000"+
-		"LM\u0003\u0012\t\u0000MN\u0003\u0010\b\u0000NQ\u0001\u0000\u0000\u0000"+
-		"OQ\u0001\u0000\u0000\u0000PK\u0001\u0000\u0000\u0000PO\u0001\u0000\u0000"+
-		"\u0000Q\u0011\u0001\u0000\u0000\u0000RS\u0003\u0018\f\u0000ST\u0003\u0014"+
-		"\n\u0000T\u0013\u0001\u0000\u0000\u0000UV\u0005\u0004\u0000\u0000VW\u0003"+
-		"\u0018\f\u0000WX\u0003\u0014\n\u0000X[\u0001\u0000\u0000\u0000Y[\u0001"+
-		"\u0000\u0000\u0000ZU\u0001\u0000\u0000\u0000ZY\u0001\u0000\u0000\u0000"+
-		"[\u0015\u0001\u0000\u0000\u0000\\]\u0007\u0002\u0000\u0000]\u0017\u0001"+
-		"\u0000\u0000\u0000^_\u0003\u001a\r\u0000_`\u0003\u0016\u000b\u0000`a\u0003"+
-		"\u001a\r\u0000ad\u0001\u0000\u0000\u0000bd\u0003\u001a\r\u0000c^\u0001"+
-		"\u0000\u0000\u0000cb\u0001\u0000\u0000\u0000d\u0019\u0001\u0000\u0000"+
-		"\u0000ej\u0003\u001c\u000e\u0000fg\u0007\u0003\u0000\u0000gi\u0003\u001c"+
-		"\u000e\u0000hf\u0001\u0000\u0000\u0000il\u0001\u0000\u0000\u0000jh\u0001"+
-		"\u0000\u0000\u0000jk\u0001\u0000\u0000\u0000k\u001b\u0001\u0000\u0000"+
-		"\u0000lj\u0001\u0000\u0000\u0000mr\u0003\u001e\u000f\u0000no\u0007\u0004"+
-		"\u0000\u0000oq\u0003\u001e\u000f\u0000pn\u0001\u0000\u0000\u0000qt\u0001"+
-		"\u0000\u0000\u0000rp\u0001\u0000\u0000\u0000rs\u0001\u0000\u0000\u0000"+
-		"s\u001d\u0001\u0000\u0000\u0000tr\u0001\u0000\u0000\u0000uz\u0003 \u0010"+
-		"\u0000vw\u0005\u001c\u0000\u0000wy\u0003 \u0010\u0000xv\u0001\u0000\u0000"+
-		"\u0000y|\u0001\u0000\u0000\u0000zx\u0001\u0000\u0000\u0000z{\u0001\u0000"+
-		"\u0000\u0000{\u001f\u0001\u0000\u0000\u0000|z\u0001\u0000\u0000\u0000"+
-		"}~\u0003$\u0012\u0000~\u007f\u0003\"\u0011\u0000\u007f!\u0001\u0000\u0000"+
-		"\u0000\u0080\u0087\u0005\'\u0000\u0000\u0081\u0087\u0005(\u0000\u0000"+
-		"\u0082\u0083\u0005\u000f\u0000\u0000\u0083\u0084\u0003\u000e\u0007\u0000"+
-		"\u0084\u0085\u0005\u0010\u0000\u0000\u0085\u0087\u0001\u0000\u0000\u0000"+
-		"\u0086\u0080\u0001\u0000\u0000\u0000\u0086\u0081\u0001\u0000\u0000\u0000"+
-		"\u0086\u0082\u0001\u0000\u0000\u0000\u0087#\u0001\u0000\u0000\u0000\u0088"+
-		"\u008a\u0007\u0005\u0000\u0000\u0089\u0088\u0001\u0000\u0000\u0000\u008a"+
-		"\u008d\u0001\u0000\u0000\u0000\u008b\u0089\u0001\u0000\u0000\u0000\u008b"+
-		"\u008c\u0001\u0000\u0000\u0000\u008c%\u0001\u0000\u0000\u0000\u008d\u008b"+
-		"\u0001\u0000\u0000\u0000\u000b*4=PZcjrz\u0086\u008b";
+		"\u0002\u0013\u0007\u0013\u0002\u0014\u0007\u0014\u0002\u0015\u0007\u0015"+
+		"\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001"+
+		"2\b\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002"+
+		">\b\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0003\u0003G\b\u0003\u0001\u0004\u0001\u0004"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005"+
+		"\u0001\u0006\u0001\u0006\u0003\u0006S\b\u0006\u0001\u0007\u0001\u0007"+
+		"\u0001\u0007\u0003\u0007X\b\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0003"+
+		"\b^\b\b\u0001\t\u0001\t\u0001\n\u0001\n\u0001\n\u0001\u000b\u0001\u000b"+
+		"\u0001\u000b\u0001\u000b\u0001\u000b\u0003\u000bj\b\u000b\u0001\f\u0001"+
+		"\f\u0001\f\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r\u0003\rt\b\r\u0001"+
+		"\u000e\u0001\u000e\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001"+
+		"\u000f\u0003\u000f}\b\u000f\u0001\u0010\u0001\u0010\u0001\u0010\u0005"+
+		"\u0010\u0082\b\u0010\n\u0010\f\u0010\u0085\t\u0010\u0001\u0011\u0001\u0011"+
+		"\u0001\u0011\u0005\u0011\u008a\b\u0011\n\u0011\f\u0011\u008d\t\u0011\u0001"+
+		"\u0012\u0001\u0012\u0001\u0012\u0005\u0012\u0092\b\u0012\n\u0012\f\u0012"+
+		"\u0095\t\u0012\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0003\u0014"+
+		"\u00a1\b\u0014\u0001\u0015\u0005\u0015\u00a4\b\u0015\n\u0015\f\u0015\u00a7"+
+		"\t\u0015\u0001\u0015\u0000\u0000\u0016\u0000\u0002\u0004\u0006\b\n\f\u000e"+
+		"\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*\u0000\u0006\u0001"+
+		"\u0000\u0014\u0018\u0001\u0000\u0001\u0003\u0001\u0000\u001f$\u0001\u0000"+
+		"\u0019\u001a\u0002\u0000\u001b\u001c\u001e\u001e\u0002\u0000\u0019\u001a"+
+		"\'\'\u00a3\u0000,\u0001\u0000\u0000\u0000\u00021\u0001\u0000\u0000\u0000"+
+		"\u0004=\u0001\u0000\u0000\u0000\u0006F\u0001\u0000\u0000\u0000\bH\u0001"+
+		"\u0000\u0000\u0000\nJ\u0001\u0000\u0000\u0000\fR\u0001\u0000\u0000\u0000"+
+		"\u000eW\u0001\u0000\u0000\u0000\u0010]\u0001\u0000\u0000\u0000\u0012_"+
+		"\u0001\u0000\u0000\u0000\u0014a\u0001\u0000\u0000\u0000\u0016i\u0001\u0000"+
+		"\u0000\u0000\u0018k\u0001\u0000\u0000\u0000\u001as\u0001\u0000\u0000\u0000"+
+		"\u001cu\u0001\u0000\u0000\u0000\u001e|\u0001\u0000\u0000\u0000 ~\u0001"+
+		"\u0000\u0000\u0000\"\u0086\u0001\u0000\u0000\u0000$\u008e\u0001\u0000"+
+		"\u0000\u0000&\u0096\u0001\u0000\u0000\u0000(\u00a0\u0001\u0000\u0000\u0000"+
+		"*\u00a5\u0001\u0000\u0000\u0000,-\u0003\u0002\u0001\u0000-\u0001\u0001"+
+		"\u0000\u0000\u0000.2\u0003\n\u0005\u0000/2\u0003\u0004\u0002\u000002\u0001"+
+		"\u0000\u0000\u00001.\u0001\u0000\u0000\u00001/\u0001\u0000\u0000\u0000"+
+		"10\u0001\u0000\u0000\u00002\u0003\u0001\u0000\u0000\u000034\u0005)\u0000"+
+		"\u000045\u0003\b\u0004\u000056\u0003\u0014\n\u000067\u0003\u0002\u0001"+
+		"\u00007>\u0001\u0000\u0000\u000089\u0005)\u0000\u00009:\u0003\u0006\u0003"+
+		"\u0000:;\u0003\u0014\n\u0000;<\u0003\u0002\u0001\u0000<>\u0001\u0000\u0000"+
+		"\u0000=3\u0001\u0000\u0000\u0000=8\u0001\u0000\u0000\u0000>\u0005\u0001"+
+		"\u0000\u0000\u0000?@\u0005\t\u0000\u0000@A\u0005)\u0000\u0000AB\u0003"+
+		"\u0006\u0003\u0000BC\u0003\u0014\n\u0000CD\u0005\t\u0000\u0000DG\u0001"+
+		"\u0000\u0000\u0000EG\u0005&\u0000\u0000F?\u0001\u0000\u0000\u0000FE\u0001"+
+		"\u0000\u0000\u0000G\u0007\u0001\u0000\u0000\u0000HI\u0007\u0000\u0000"+
+		"\u0000I\t\u0001\u0000\u0000\u0000JK\u0003\u0012\t\u0000KL\u0005\u0010"+
+		"\u0000\u0000LM\u0003\f\u0006\u0000MN\u0005\u0011\u0000\u0000NO\u0003\u0002"+
+		"\u0001\u0000O\u000b\u0001\u0000\u0000\u0000PS\u0003\u0014\n\u0000QS\u0003"+
+		"\u000e\u0007\u0000RP\u0001\u0000\u0000\u0000RQ\u0001\u0000\u0000\u0000"+
+		"S\r\u0001\u0000\u0000\u0000TU\u0005\u0004\u0000\u0000UX\u0003\u0010\b"+
+		"\u0000VX\u0001\u0000\u0000\u0000WT\u0001\u0000\u0000\u0000WV\u0001\u0000"+
+		"\u0000\u0000X\u000f\u0001\u0000\u0000\u0000YZ\u0005\u0007\u0000\u0000"+
+		"Z[\u0005\u0004\u0000\u0000[^\u0003\u0010\b\u0000\\^\u0001\u0000\u0000"+
+		"\u0000]Y\u0001\u0000\u0000\u0000]\\\u0001\u0000\u0000\u0000^\u0011\u0001"+
+		"\u0000\u0000\u0000_`\u0007\u0001\u0000\u0000`\u0013\u0001\u0000\u0000"+
+		"\u0000ab\u0003\u0018\f\u0000bc\u0003\u0016\u000b\u0000c\u0015\u0001\u0000"+
+		"\u0000\u0000de\u0005\u0006\u0000\u0000ef\u0003\u0018\f\u0000fg\u0003\u0016"+
+		"\u000b\u0000gj\u0001\u0000\u0000\u0000hj\u0001\u0000\u0000\u0000id\u0001"+
+		"\u0000\u0000\u0000ih\u0001\u0000\u0000\u0000j\u0017\u0001\u0000\u0000"+
+		"\u0000kl\u0003\u001e\u000f\u0000lm\u0003\u001a\r\u0000m\u0019\u0001\u0000"+
+		"\u0000\u0000no\u0005\u0005\u0000\u0000op\u0003\u001e\u000f\u0000pq\u0003"+
+		"\u001a\r\u0000qt\u0001\u0000\u0000\u0000rt\u0001\u0000\u0000\u0000sn\u0001"+
+		"\u0000\u0000\u0000sr\u0001\u0000\u0000\u0000t\u001b\u0001\u0000\u0000"+
+		"\u0000uv\u0007\u0002\u0000\u0000v\u001d\u0001\u0000\u0000\u0000wx\u0003"+
+		" \u0010\u0000xy\u0003\u001c\u000e\u0000yz\u0003 \u0010\u0000z}\u0001\u0000"+
+		"\u0000\u0000{}\u0003 \u0010\u0000|w\u0001\u0000\u0000\u0000|{\u0001\u0000"+
+		"\u0000\u0000}\u001f\u0001\u0000\u0000\u0000~\u0083\u0003\"\u0011\u0000"+
+		"\u007f\u0080\u0007\u0003\u0000\u0000\u0080\u0082\u0003\"\u0011\u0000\u0081"+
+		"\u007f\u0001\u0000\u0000\u0000\u0082\u0085\u0001\u0000\u0000\u0000\u0083"+
+		"\u0081\u0001\u0000\u0000\u0000\u0083\u0084\u0001\u0000\u0000\u0000\u0084"+
+		"!\u0001\u0000\u0000\u0000\u0085\u0083\u0001\u0000\u0000\u0000\u0086\u008b"+
+		"\u0003$\u0012\u0000\u0087\u0088\u0007\u0004\u0000\u0000\u0088\u008a\u0003"+
+		"$\u0012\u0000\u0089\u0087\u0001\u0000\u0000\u0000\u008a\u008d\u0001\u0000"+
+		"\u0000\u0000\u008b\u0089\u0001\u0000\u0000\u0000\u008b\u008c\u0001\u0000"+
+		"\u0000\u0000\u008c#\u0001\u0000\u0000\u0000\u008d\u008b\u0001\u0000\u0000"+
+		"\u0000\u008e\u0093\u0003&\u0013\u0000\u008f\u0090\u0005\u001d\u0000\u0000"+
+		"\u0090\u0092\u0003&\u0013\u0000\u0091\u008f\u0001\u0000\u0000\u0000\u0092"+
+		"\u0095\u0001\u0000\u0000\u0000\u0093\u0091\u0001\u0000\u0000\u0000\u0093"+
+		"\u0094\u0001\u0000\u0000\u0000\u0094%\u0001\u0000\u0000\u0000\u0095\u0093"+
+		"\u0001\u0000\u0000\u0000\u0096\u0097\u0003*\u0015\u0000\u0097\u0098\u0003"+
+		"(\u0014\u0000\u0098\'\u0001\u0000\u0000\u0000\u0099\u00a1\u0005(\u0000"+
+		"\u0000\u009a\u00a1\u0005)\u0000\u0000\u009b\u009c\u0005\u0010\u0000\u0000"+
+		"\u009c\u009d\u0003\u0014\n\u0000\u009d\u009e\u0005\u0011\u0000\u0000\u009e"+
+		"\u00a1\u0001\u0000\u0000\u0000\u009f\u00a1\u0005\u0004\u0000\u0000\u00a0"+
+		"\u0099\u0001\u0000\u0000\u0000\u00a0\u009a\u0001\u0000\u0000\u0000\u00a0"+
+		"\u009b\u0001\u0000\u0000\u0000\u00a0\u009f\u0001\u0000\u0000\u0000\u00a1"+
+		")\u0001\u0000\u0000\u0000\u00a2\u00a4\u0007\u0005\u0000\u0000\u00a3\u00a2"+
+		"\u0001\u0000\u0000\u0000\u00a4\u00a7\u0001\u0000\u0000\u0000\u00a5\u00a3"+
+		"\u0001\u0000\u0000\u0000\u00a5\u00a6\u0001\u0000\u0000\u0000\u00a6+\u0001"+
+		"\u0000\u0000\u0000\u00a7\u00a5\u0001\u0000\u0000\u0000\u000e1=FRW]is|"+
+		"\u0083\u008b\u0093\u00a0\u00a5";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

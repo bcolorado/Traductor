@@ -3,12 +3,21 @@ grammar LatinoGrammar;
 
 // REGLAS SINTACTICAS
 main_program:   substatement;
-substatement: print_stat | assign;
-assign: (ID)(assignmentOperator)(expr) | (ID)(assignAux)(expr);
+substatement: print_stat | assign |;
+
+// ASIGNACIÓN -------------------------------------------------------------------------------
+assign: ID assignmentOperator expr substatement | ID assignAux expr substatement;
 assignAux: (TKN_COMMA)(ID)(assignAux)(expr)(TKN_COMMA) | TKN_ASSIGN;
 assignmentOperator: TKN_DIV_ASSIGN | TKN_MOD_ASSIGN| TKN_PLUS_ASSIGN| TKN_MINUS_ASSIGN| TKN_TIMES_ASSIGN;
-print_stat: (print_operations)(TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR);
+
+// IMPRESIÓN -------------------------------------------------------------------------------
+print_stat: print_operations TKN_OPENING_PAR print_stat_cont TKN_CLOSING_PAR substatement;
+print_stat_cont: expr | print_concat_string;
+print_concat_string: STRING print_concat_string_aux| ;
+print_concat_string_aux: TKN_CONCAT STRING print_concat_string_aux | ;
 print_operations: 'escribir' | 'imprimir' | 'poner';
+
+// EXPRESIONES -----------------------------------------------------------------------------
 expr: expBool exprRest;
 exprRest: TKN_OR expBool exprRest |;
 expBool: expRel expBoolRest;
@@ -16,7 +25,7 @@ expBoolRest: TKN_AND expRel expBoolRest |;
 opRel: TKN_EQUAL | TKN_GEQ | TKN_GREATER | TKN_LEQ | TKN_LESS | TKN_NEQ;
 expRel: (expArit)(opRel)(expArit) | (expArit);
 expArit: term ( (TKN_PLUS | TKN_MINUS) term)*;
-term   :  factor ( (TKN_TIMES | TKN_DIV | TKN_MOD | TKN_CONCAT) factor)*;
+term   :  factor ( (TKN_TIMES | TKN_DIV | TKN_MOD ) factor)*;
 factor :  t_factor((TKN_POWER) t_factor)*;
 t_factor: (expr_factor)(expr_terminals);
 expr_terminals: NUM | ID | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR) | STRING;
