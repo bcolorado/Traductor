@@ -88,6 +88,11 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
 
     // EXPRESIONES --------------------------------------------------------------
 
+    @Override public void enterExpr_factor(LatinoGrammarParser.Expr_factorContext ctx) {
+        if(ctx.getText() != null) {
+            FileUtils.writeToFile(ctx.getText(), OUTPUT_FILE_PATH);
+        }
+    }
     @Override public void enterExpr_terminals(LatinoGrammarParser.Expr_terminalsContext ctx) {
         if(ctx.TKN_OPENING_PAR() != null) { // existe un parentesis
             FileUtils.writeToFile("(", OUTPUT_FILE_PATH);

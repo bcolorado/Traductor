@@ -1,11 +1,13 @@
-escribir("Greetings")
-limpiar()
-x = acadena(3)
-y = anumero("1245") ^ 2*anumero('12'.."67")
 
-escribir(y-x)
 
-z, d = (x/y), 2%3
 
-a, b, _ ,c = (123*2)^14, -1/1+-2, 1*anumero("12".."13"+'1'), alogico("verdadero")
-a, b, c = c,b,d
+
+// Well done
+
+/* I dont´t have too many ideas **//*****/
+
+
+Don't forget to handle comments as well
+________-____________________-___________________-___________________
+
+*/

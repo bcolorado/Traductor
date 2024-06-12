@@ -3,7 +3,7 @@ grammar LatinoGrammar;
 
 // REGLAS SINTACTICAS
 main_program:   substatement;
-substatement: print_stat substatement | assign substatement | built_in_functions substatement |;
+substatement: print_stat substatement | assign substatement | built_in_functions substatement | function_stat substatement | ;
 
 // ASIGNACIÓN -------------------------------------------------------------------------------
 assign: ID assignmentOperator expr | ID assignAux expr | ID assignIncrDecr ;
@@ -24,6 +24,17 @@ anumero_stat: 'anumero' TKN_OPENING_PAR expr TKN_CLOSING_PAR;
 print_stat: print_operations TKN_OPENING_PAR print_stat_cont TKN_CLOSING_PAR;
 print_stat_cont: expr;
 print_operations: 'escribir' | 'imprimir' | 'poner';
+
+// FUNCIONES -------------------------------------------------------------------------------
+function_stat: function_op ID TKN_OPENING_PAR function_args TKN_CLOSING_PAR function_content function_ret 'fin';
+function_op: 'funcion' | 'fun';
+function_args: ID function_args_aux |;
+function_args_aux: TKN_COMMA ID function_args_aux | ;
+function_ret: function_ret_op expr;
+function_ret_op: 'retornar' | 'regresar' | 'ret';
+function_content: substatement;
+
+
 
 // EXPRESIONES -----------------------------------------------------------------------------
 expr: expBool exprRest;
@@ -92,3 +103,5 @@ ID    : [a-zA-Z_][0-9a-zA-Z_]*;
 // Fragment rules
 fragment DIGIT  : [0-9];
 ESPACIO: [ \t\r\n]+ -> skip;
+COMMENT_LINE: '//' ~[\r\n]* -> skip;
+COMMENT_BLOCK: '/*' .*? '*/' -> skip;

@@ -24,7 +24,8 @@ public class LatinoGrammarParser extends Parser {
 		TKN_TIMES_ASSIGN=28, TKN_MINUS_ASSIGN=29, TKN_PLUS_ASSIGN=30, TKN_PLUS=31, 
 		TKN_MINUS=32, TKN_TIMES=33, TKN_DIV=34, TKN_POWER=35, TKN_MOD=36, TKN_EQUAL=37, 
 		TKN_NEQ=38, TKN_LEQ=39, TKN_GEQ=40, TKN_GREATER=41, TKN_LESS=42, TKN_REGEX=43, 
-		TKN_ASSIGN=44, TKN_NOT=45, NUM=46, ID=47, ESPACIO=48;
+		TKN_ASSIGN=44, TKN_NOT=45, NUM=46, ID=47, ESPACIO=48, COMMENT_LINE=49, 
+		COMMENT_BLOCK=50;
 	public static final int
 		RULE_main_program = 0, RULE_substatement = 1, RULE_assign = 2, RULE_assignAux = 3, 
 		RULE_assignmentOperator = 4, RULE_assignIncrDecr = 5, RULE_built_in_functions = 6, 
@@ -69,7 +70,7 @@ public class LatinoGrammarParser extends Parser {
 			"TKN_MINUS_ASSIGN", "TKN_PLUS_ASSIGN", "TKN_PLUS", "TKN_MINUS", "TKN_TIMES", 
 			"TKN_DIV", "TKN_POWER", "TKN_MOD", "TKN_EQUAL", "TKN_NEQ", "TKN_LEQ", 
 			"TKN_GEQ", "TKN_GREATER", "TKN_LESS", "TKN_REGEX", "TKN_ASSIGN", "TKN_NOT", 
-			"NUM", "ID", "ESPACIO"
+			"NUM", "ID", "ESPACIO", "COMMENT_LINE", "COMMENT_BLOCK"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -2013,7 +2014,7 @@ public class LatinoGrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u00010\u00f1\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u00012\u00f1\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
