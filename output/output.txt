@@ -1,9 +1,9 @@
 calificacion='B'
-if calificacion== 'A' or 'B' or 'C':
+if calificacion== 'A' or calificacion == 'B' or calificacion == 'C':
 	print("¡Excelente!.")
-elif calificacion== 'D':
+elif calificacion == 'D':
 	print("Necesitas mejorar.")
-elif calificacion== 'F':
+elif calificacion == 'F':
 	print("Has reprobado.")
 else:
 	print("Calificación invalida.")

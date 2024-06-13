@@ -1,6 +1,7 @@
 calificacion = 'B'
 
 elegir(calificacion)
+
   caso 'A':
   caso 'B':
   caso 'C':

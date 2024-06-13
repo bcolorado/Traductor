@@ -187,12 +187,12 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
                 isFirstCaseClause = false;
 
             } else if (pastCaseEmpty) {
-                FileUtils.writeToFile(" or ", OUTPUT_FILE_PATH);
+                FileUtils.writeToFile(" or " + switchExpression + " == " , OUTPUT_FILE_PATH);
                 pastCaseEmpty = false;
             } else {
                 FileUtils.writeToFile("elif ", OUTPUT_FILE_PATH);
                 FileUtils.writeToFile(switchExpression, OUTPUT_FILE_PATH);
-                FileUtils.writeToFile("== ", OUTPUT_FILE_PATH);
+                FileUtils.writeToFile(" == ", OUTPUT_FILE_PATH);
             }
         } else {
             if(pastCaseEmpty == false) {
@@ -207,7 +207,7 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
                 }
 
             } else{
-                FileUtils.writeToFile(" or ", OUTPUT_FILE_PATH);
+                FileUtils.writeToFile(" or " + switchExpression + " == " , OUTPUT_FILE_PATH);
 
             }
 
