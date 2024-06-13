@@ -3,7 +3,7 @@ grammar LatinoGrammar;
 
 // REGLAS SINTACTICAS
 main_program:   substatement;
-substatement: print_stat substatement | assign substatement | built_in_functions substatement | function_stat substatement | ;
+substatement: print_stat substatement | assign substatement | built_in_functions substatement | function_stat substatement | conditionals substatement |;
 
 // ASIGNACIÓN -------------------------------------------------------------------------------
 assign: ID assignmentOperator expr | ID assignAux expr | ID assignIncrDecr ;
@@ -42,6 +42,45 @@ function_call: ID TKN_OPENING_PAR function_args TKN_CLOSING_PAR;
 array: TKN_OPENING_BRA array_content TKN_CLOSING_BRA;
 array_content: expr array_content_aux | ;
 array_content_aux: TKN_COMMA expr array_content_aux | ;
+// CONDICIONALES --------------------------------------------------------------------------
+conditionals: if_conditional | swicth_condition;
+
+// IF
+
+if_conditional: 'si' conditional_expr conditional_substatement if_conditional_aux 'fin';
+conditional_expr: expr;
+conditional_substatement: substatement;
+if_conditional_aux: 'osi' conditional_expr conditional_substatement if_conditional_aux
+                    | 'sino' conditional_substatement
+                    |;
+
+
+// SWITCH
+swicth_condition:
+    'elegir' expArit caseBlock 'fin';
+
+caseBlock:
+    caseClause+ caseBlock
+    | defaultClause
+    | otherClause;
+
+caseClause:
+    'caso' expr TKN_COLON substatement romperOp;
+
+defaultClause:
+    'defecto' TKN_COLON substatement romperOp;
+
+otherClause:
+    'otro' TKN_COLON substatement romperOp;
+
+
+
+romperOp:
+    'romper'
+    | ;  // epsilon is represented by an empty alternative
+
+
+
 // EXPRESIONES -----------------------------------------------------------------------------
 expr: expBool exprRest;
 exprRest: TKN_OR expBool exprRest |;

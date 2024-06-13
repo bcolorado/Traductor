@@ -1,16 +1,7 @@
-print("Greetings")
-x=str(3)
-y=int("1245")^2*int('12' + "67")
-print("1"+"2")
-print(y-x)
-z,d=(x/y),2%3
-a,b,_,c=(123*2)^14,-1/1+-2,1*int("12" + "13"+'1'),bool("verdadero")
-a,b,c=c,b,d
-print("Value of a: " + a + "\n")
-print('Value of b: ' + b + "\n")
-print('"Value of b: "' + c + "'\n' " + _)
-def hola():
-	return "Hola Mundo, Latinito!"
-def SimpleFun(input):
-	return input*2
-evil_array=[hola(),90%3,SimpleFun(16)]hola()90%3SimpleFun(16)16
+x=40
+if x > 10:
+	print("X es mayor que 10")
+	if x > 20:
+		print("y mayor que 20")
+	else:
+		print("pero menor que 20")

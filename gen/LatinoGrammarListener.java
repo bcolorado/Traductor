@@ -297,6 +297,116 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitArray_content_aux(LatinoGrammarParser.Array_content_auxContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#conditionals}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionals(LatinoGrammarParser.ConditionalsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#conditionals}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionals(LatinoGrammarParser.ConditionalsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#if_conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_conditional(LatinoGrammarParser.If_conditionalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#if_conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_conditional(LatinoGrammarParser.If_conditionalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#conditional_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditional_expr(LatinoGrammarParser.Conditional_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#conditional_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditional_expr(LatinoGrammarParser.Conditional_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#conditional_substatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditional_substatement(LatinoGrammarParser.Conditional_substatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#conditional_substatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditional_substatement(LatinoGrammarParser.Conditional_substatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#if_conditional_aux}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_conditional_aux(LatinoGrammarParser.If_conditional_auxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#if_conditional_aux}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_conditional_aux(LatinoGrammarParser.If_conditional_auxContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#swicth_condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterSwicth_condition(LatinoGrammarParser.Swicth_conditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#swicth_condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitSwicth_condition(LatinoGrammarParser.Swicth_conditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#caseBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterCaseBlock(LatinoGrammarParser.CaseBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#caseBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitCaseBlock(LatinoGrammarParser.CaseBlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#caseClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCaseClause(LatinoGrammarParser.CaseClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#caseClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCaseClause(LatinoGrammarParser.CaseClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#defaultClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefaultClause(LatinoGrammarParser.DefaultClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#defaultClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefaultClause(LatinoGrammarParser.DefaultClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#otherClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterOtherClause(LatinoGrammarParser.OtherClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#otherClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitOtherClause(LatinoGrammarParser.OtherClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#romperOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterRomperOp(LatinoGrammarParser.RomperOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#romperOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitRomperOp(LatinoGrammarParser.RomperOpContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#expr}.
 	 * @param ctx the parse tree
 	 */

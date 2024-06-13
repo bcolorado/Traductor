@@ -7,9 +7,10 @@ import javax.print.DocFlavor;
 
 public class TranslateListeners extends LatinoGrammarBaseListener {
     private static final String OUTPUT_FILE_PATH = "output/output.txt";
-
+    int identationLevel = 0;
     // ASIGNACIÓN --------------------------------------------------------------
     @Override public void enterAssign(LatinoGrammarParser.AssignContext ctx) {
+        FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
         FileUtils.writeToFile(ctx.ID().getText(), OUTPUT_FILE_PATH);
     }
 
@@ -43,6 +44,7 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     // ACADENA
 
     @Override public void enterAcadena_stat(LatinoGrammarParser.Acadena_statContext ctx) {
+        FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
         FileUtils.writeToFile("str(", OUTPUT_FILE_PATH);
     }
 
@@ -53,6 +55,7 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     // ALOGICO
 
     @Override public void enterAlogico_stat(LatinoGrammarParser.Alogico_statContext ctx) {
+        FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
         FileUtils.writeToFile("bool(", OUTPUT_FILE_PATH);
     }
     @Override public void exitAlogico_stat(LatinoGrammarParser.Alogico_statContext ctx) {
@@ -63,6 +66,7 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     // ANUMERO
 
     @Override public void enterAnumero_stat(LatinoGrammarParser.Anumero_statContext ctx) {
+        FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
         FileUtils.writeToFile("int(", OUTPUT_FILE_PATH);
     }
 
@@ -73,6 +77,7 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     // IMPRESIÓN --------------------------------------------------------------
 
     @Override public void enterPrint_stat(LatinoGrammarParser.Print_statContext ctx) {
+        FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
         FileUtils.writeToFile("print(", OUTPUT_FILE_PATH);
     }
 
@@ -125,6 +130,40 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     // ARRAY
 
 
+    // CONDICIONAL
+
+    @Override public void enterIf_conditional(LatinoGrammarParser.If_conditionalContext ctx) {
+        FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile("if ", OUTPUT_FILE_PATH);
+
+    }
+
+
+
+
+    @Override public void exitConditional_expr(LatinoGrammarParser.Conditional_exprContext ctx) {
+        FileUtils.writeToFile(":\n", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterConditional_substatement(LatinoGrammarParser.Conditional_substatementContext ctx) {
+        identationLevel++;
+    }
+    @Override public void exitConditional_substatement(LatinoGrammarParser.Conditional_substatementContext ctx) {
+        identationLevel--;
+    }
+
+    @Override public void enterIf_conditional_aux(LatinoGrammarParser.If_conditional_auxContext ctx) {
+        if (ctx.getChild(0) != null) {
+            if (ctx.getChild(0).getText().equals("osi")) {
+                FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
+                FileUtils.writeToFile("elif ", OUTPUT_FILE_PATH);
+            } else if (ctx.getChild(0).getText().equals("sino")) {
+                FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
+                FileUtils.writeToFile("else:\n", OUTPUT_FILE_PATH);
+            }
+        }
+    }
+
 
 
     // EXPRESIONES --------------------------------------------------------------
@@ -144,7 +183,7 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
         }
     }
     @Override public void enterOpRel(LatinoGrammarParser.OpRelContext ctx) {
-        FileUtils.writeToFile(ctx.getText(), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(" " + ctx.getText() + " ", OUTPUT_FILE_PATH);
     }
 
     @Override public void enterExpArit(LatinoGrammarParser.ExpAritContext ctx) {
