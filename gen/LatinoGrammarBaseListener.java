@@ -460,6 +460,18 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCaseClauseExpr(LatinoGrammarParser.CaseClauseExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCaseClauseExpr(LatinoGrammarParser.CaseClauseExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDefaultClause(LatinoGrammarParser.DefaultClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}

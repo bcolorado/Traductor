@@ -8,6 +8,10 @@ import javax.print.DocFlavor;
 public class TranslateListeners extends LatinoGrammarBaseListener {
     private static final String OUTPUT_FILE_PATH = "output/output.txt";
     int identationLevel = 0;
+    private boolean isFirstCaseClause = true;
+    private String switchExpression = null;
+    private boolean pastCaseEmpty = false;
+
     // ASIGNACIÓN --------------------------------------------------------------
     @Override public void enterAssign(LatinoGrammarParser.AssignContext ctx) {
         FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
@@ -138,9 +142,6 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
 
     }
 
-
-
-
     @Override public void exitConditional_expr(LatinoGrammarParser.Conditional_exprContext ctx) {
         FileUtils.writeToFile(":\n", OUTPUT_FILE_PATH);
     }
@@ -162,6 +163,70 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
                 FileUtils.writeToFile("else:\n", OUTPUT_FILE_PATH);
             }
         }
+    }
+
+    // SWICTH
+    @Override public void enterSwicth_condition(LatinoGrammarParser.Swicth_conditionContext ctx) {
+        FileUtils.writeToFile("if ", OUTPUT_FILE_PATH);
+        switchExpression = ctx.expr().getText();
+
+    }
+
+    @Override public void exitSwicth_condition(LatinoGrammarParser.Swicth_conditionContext ctx) {
+        identationLevel--;
+        switchExpression = null;
+        isFirstCaseClause = true;
+    }
+
+
+    @Override public void enterCaseClause(LatinoGrammarParser.CaseClauseContext ctx) {
+
+        if (ctx.conditional_substatement().substatement().getText() != "") {
+            if(isFirstCaseClause) {
+                FileUtils.writeToFile("== ", OUTPUT_FILE_PATH);
+                isFirstCaseClause = false;
+
+            } else if (pastCaseEmpty) {
+                FileUtils.writeToFile(" or ", OUTPUT_FILE_PATH);
+                pastCaseEmpty = false;
+            } else {
+                FileUtils.writeToFile("elif ", OUTPUT_FILE_PATH);
+                FileUtils.writeToFile(switchExpression, OUTPUT_FILE_PATH);
+                FileUtils.writeToFile("== ", OUTPUT_FILE_PATH);
+            }
+        } else {
+            if(pastCaseEmpty == false) {
+                pastCaseEmpty = true;
+                if(isFirstCaseClause) {
+                    FileUtils.writeToFile("== ", OUTPUT_FILE_PATH);
+                    isFirstCaseClause = false;
+                } else{
+                    FileUtils.writeToFile("elif ", OUTPUT_FILE_PATH);
+                    FileUtils.writeToFile(switchExpression, OUTPUT_FILE_PATH);
+                    FileUtils.writeToFile("== ", OUTPUT_FILE_PATH);
+                }
+
+            } else{
+                FileUtils.writeToFile(" or ", OUTPUT_FILE_PATH);
+
+            }
+
+        }
+    }
+
+    @Override public void exitCaseClauseExpr(LatinoGrammarParser.CaseClauseExprContext ctx) {
+        if(!pastCaseEmpty){
+            FileUtils.writeToFile(":\n", OUTPUT_FILE_PATH);
+        }
+
+    }
+    @Override public void enterDefaultClause(LatinoGrammarParser.DefaultClauseContext ctx) {
+        FileUtils.writeToFile("else:\n", OUTPUT_FILE_PATH);
+    }
+
+
+    @Override public void enterOtherClause(LatinoGrammarParser.OtherClauseContext ctx) {
+        FileUtils.writeToFile("else:\n", OUTPUT_FILE_PATH);
     }
 
 

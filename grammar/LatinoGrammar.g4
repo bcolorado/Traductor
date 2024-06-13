@@ -57,7 +57,7 @@ if_conditional_aux: 'osi' conditional_expr conditional_substatement if_condition
 
 // SWITCH
 swicth_condition:
-    'elegir' expArit caseBlock 'fin';
+    'elegir' TKN_OPENING_PAR expr TKN_CLOSING_PAR caseBlock 'fin';
 
 caseBlock:
     caseClause+ caseBlock
@@ -65,13 +65,15 @@ caseBlock:
     | otherClause;
 
 caseClause:
-    'caso' expr TKN_COLON substatement romperOp;
+    'caso' caseClauseExpr TKN_COLON conditional_substatement romperOp;
+
+caseClauseExpr: expr;
 
 defaultClause:
-    'defecto' TKN_COLON substatement romperOp;
+    'defecto' TKN_COLON conditional_substatement romperOp;
 
 otherClause:
-    'otro' TKN_COLON substatement romperOp;
+    'otro' TKN_COLON conditional_substatement romperOp;
 
 
 

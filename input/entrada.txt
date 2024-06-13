@@ -1,10 +1,14 @@
-x = 40
+calificacion = 'B'
 
-si x > 10
-  escribir("X es mayor que 10")
-  si x > 20
-    escribir("y mayor que 20")
-  sino
-    escribir("pero menor que 20")
-  fin
+elegir(calificacion)
+  caso 'A':
+  caso 'B':
+  caso 'C':
+    escribir("¡Excelente!.")
+  caso 'D':
+    escribir("Necesitas mejorar.")
+  caso 'F':
+    escribir("Has reprobado.")
+  otro:
+    escribir("Calificación invalida.")
 fin

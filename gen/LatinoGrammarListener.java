@@ -377,6 +377,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitCaseClause(LatinoGrammarParser.CaseClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#caseClauseExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterCaseClauseExpr(LatinoGrammarParser.CaseClauseExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#caseClauseExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitCaseClauseExpr(LatinoGrammarParser.CaseClauseExprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#defaultClause}.
 	 * @param ctx the parse tree
 	 */

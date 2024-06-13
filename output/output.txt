@@ -1,7 +1,9 @@
-x=40
-if x > 10:
-	print("X es mayor que 10")
-	if x > 20:
-		print("y mayor que 20")
-	else:
-		print("pero menor que 20")
+calificacion='B'
+if calificacion== 'A' or 'B' or 'C':
+	print("¡Excelente!.")
+elif calificacion== 'D':
+	print("Necesitas mejorar.")
+elif calificacion== 'F':
+	print("Has reprobado.")
+else:
+	print("Calificación invalida.")
