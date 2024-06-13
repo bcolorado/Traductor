@@ -1,7 +1,8 @@
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
+import java.util.List;
+import javax.print.DocFlavor;
 
 
 public class TranslateListeners extends LatinoGrammarBaseListener {
@@ -81,17 +82,31 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     }
 
     @Override public void enterExprConcatOp(LatinoGrammarParser.ExprConcatOpContext ctx) {
-        FileUtils.writeToFile("+", OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(" + ", OUTPUT_FILE_PATH);
     }
 
     // FUNCIONES
 
     @Override public void enterFunction_stat(LatinoGrammarParser.Function_statContext ctx) {
         FileUtils.writeToFile("def ", OUTPUT_FILE_PATH);
-        FileUtils.writeToFile(ctx.ID().getText(), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(ctx.function_name().getText(), OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterFunction_pars(LatinoGrammarParser.Function_parsContext ctx) {
         FileUtils.writeToFile("(", OUTPUT_FILE_PATH);
-        FileUtils.writeToFile(ctx.function_args().getText(), OUTPUT_FILE_PATH);
+    }
+
+    @Override public void exitFunction_pars(LatinoGrammarParser.Function_parsContext ctx) {
         FileUtils.writeToFile("):\n", OUTPUT_FILE_PATH);
+    }
+
+
+
+    @Override public void enterFunction_args_aux(LatinoGrammarParser.Function_args_auxContext ctx) {
+        if(ctx.TKN_COMMA() != null) {
+            FileUtils.writeToFile(",", OUTPUT_FILE_PATH);
+        }
+
     }
 
     @Override public void enterFunction_content(LatinoGrammarParser.Function_contentContext ctx) {
@@ -101,8 +116,14 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
 
     @Override public void enterFunction_ret(LatinoGrammarParser.Function_retContext ctx) {
         FileUtils.writeToFile("return ", OUTPUT_FILE_PATH);
-        FileUtils.writeToFile(ctx.expr().getText(), OUTPUT_FILE_PATH);
     }
+
+    @Override public void exitFunction_ret(LatinoGrammarParser.Function_retContext ctx) {
+        FileUtils.writeToFile("\n", OUTPUT_FILE_PATH);
+    }
+
+    // ARRAY
+
 
 
 
@@ -126,6 +147,10 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
         FileUtils.writeToFile(ctx.getText(), OUTPUT_FILE_PATH);
     }
 
+    @Override public void enterExpArit(LatinoGrammarParser.ExpAritContext ctx) {
+        List<LatinoGrammarParser.TermContext> terms = ctx.term();
+
+    }
     @Override public void enterExpAritOp(LatinoGrammarParser.ExpAritOpContext ctx) {
         FileUtils.writeToFile(ctx.getText(), OUTPUT_FILE_PATH);
     }

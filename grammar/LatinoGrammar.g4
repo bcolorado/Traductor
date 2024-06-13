@@ -20,22 +20,28 @@ leer_stat: 'leer' TKN_OPENING_PAR TKN_CLOSING_PAR ;
 limpiar_stat: 'limpiar' TKN_OPENING_PAR TKN_CLOSING_PAR ;
 alogico_stat: 'alogico' TKN_OPENING_PAR expr TKN_CLOSING_PAR;
 anumero_stat: 'anumero' TKN_OPENING_PAR expr TKN_CLOSING_PAR;
+
 // IMPRESIÓN -------------------------------------------------------------------------------
 print_stat: print_operations TKN_OPENING_PAR print_stat_cont TKN_CLOSING_PAR;
 print_stat_cont: expr;
 print_operations: 'escribir' | 'imprimir' | 'poner';
 
 // FUNCIONES -------------------------------------------------------------------------------
-function_stat: function_op ID TKN_OPENING_PAR function_args TKN_CLOSING_PAR function_content 'fin';
+function_stat: function_op function_name function_pars function_content 'fin';
+function_name: ID | ;
 function_op: 'funcion' | 'fun';
-function_args: ID function_args_aux |;
-function_args_aux: TKN_COMMA ID function_args_aux | ;
+function_pars: TKN_OPENING_PAR function_args TKN_CLOSING_PAR;
+function_args: expr function_args_aux |;
+function_args_aux: TKN_COMMA expr function_args_aux | ;
 function_ret: function_ret_op expr;
 function_ret_op: 'retornar' | 'regresar' | 'ret';
 function_content: substatement function_ret;
 
-
-
+function_call: ID TKN_OPENING_PAR function_args TKN_CLOSING_PAR;
+// ARREGLOS
+array: TKN_OPENING_BRA array_content TKN_CLOSING_BRA;
+array_content: expr array_content_aux | ;
+array_content_aux: TKN_COMMA expr array_content_aux | ;
 // EXPRESIONES -----------------------------------------------------------------------------
 expr: expBool exprRest;
 exprRest: TKN_OR expBool exprRest |;
@@ -52,7 +58,9 @@ termOp: TKN_TIMES | TKN_DIV | TKN_MOD;
 factor :  t_factor(factorOp t_factor)*;
 factorOp: TKN_POWER;
 t_factor: (expr_factor)(expr_terminals);
-expr_terminals: NUM | ID | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR) | STRING | anumero_stat | alogico_stat | acadena_stat;
+expr_terminals: NUM | ID | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR) | STRING |
+    anumero_stat | alogico_stat | acadena_stat | array | function_call | function_stat
+    'verdadero' | 'falso';
 expr_factor: (TKN_MINUS | TKN_PLUS | TKN_NOT)* ;
 
 

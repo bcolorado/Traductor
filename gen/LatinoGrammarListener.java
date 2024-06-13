@@ -177,6 +177,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitFunction_stat(LatinoGrammarParser.Function_statContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_name(LatinoGrammarParser.Function_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#function_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_name(LatinoGrammarParser.Function_nameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_op}.
 	 * @param ctx the parse tree
 	 */
@@ -186,6 +196,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunction_op(LatinoGrammarParser.Function_opContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_pars}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_pars(LatinoGrammarParser.Function_parsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#function_pars}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_pars(LatinoGrammarParser.Function_parsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_args}.
 	 * @param ctx the parse tree
@@ -236,6 +256,46 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunction_content(LatinoGrammarParser.Function_contentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_call}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_call(LatinoGrammarParser.Function_callContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#function_call}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_call(LatinoGrammarParser.Function_callContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray(LatinoGrammarParser.ArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray(LatinoGrammarParser.ArrayContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#array_content}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray_content(LatinoGrammarParser.Array_contentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#array_content}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray_content(LatinoGrammarParser.Array_contentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#array_content_aux}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray_content_aux(LatinoGrammarParser.Array_content_auxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#array_content_aux}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray_content_aux(LatinoGrammarParser.Array_content_auxContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#expr}.
 	 * @param ctx the parse tree
