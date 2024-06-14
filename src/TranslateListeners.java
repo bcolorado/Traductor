@@ -11,11 +11,14 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     private boolean isFirstCaseClause = true;
     private String switchExpression = null;
     private boolean pastCaseEmpty = false;
+    private int loop_aux_num = 0;
+    private int loop_aux_num2 = 0;
+    private boolean desde_loop_flag = false;
 
     // ASIGNACIÓN --------------------------------------------------------------
     @Override public void enterAssign(LatinoGrammarParser.AssignContext ctx) {
-        FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
-        FileUtils.writeToFile(ctx.ID().getText(), OUTPUT_FILE_PATH);
+            FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
+            FileUtils.writeToFile(ctx.ID().getText(), OUTPUT_FILE_PATH);
     }
 
     @Override public void exitAssign(LatinoGrammarParser.AssignContext ctx) {
@@ -132,6 +135,53 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     }
 
     // ARRAY
+
+
+    // BUCLES --------------------------------------------------------------
+
+    @Override public void enterLoop_substatement(LatinoGrammarParser.Loop_substatementContext ctx) {
+        identationLevel++;
+    }
+    @Override public void enterDesde_loop(LatinoGrammarParser.Desde_loopContext ctx) {
+        FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile("for ", OUTPUT_FILE_PATH);
+    }
+
+
+    @Override public void exitDesde_loop(LatinoGrammarParser.Desde_loopContext ctx) { }
+
+    @Override public void enterLoop_assign(LatinoGrammarParser.Loop_assignContext ctx) {
+        this.loop_aux_num = Integer.parseInt(ctx.getChild(2).getText());
+
+        FileUtils.writeToFile(ctx.id_aux().getText(), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(" in range(", OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(ctx.getChild(2).getText(), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(", ", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterLoop_expRel(LatinoGrammarParser.Loop_expRelContext ctx) {
+        this.loop_aux_num2 = Integer.parseInt(ctx.getChild(2).getText());
+        String str = "";
+
+        if(ctx.getChild(1).getText().equals("<=")) {
+            int num = Integer.parseInt(ctx.getChild(2).getText()) + 1;
+            str = String.valueOf(num);
+        }else if(ctx.getChild(1).getText().equals(">=")){
+            int num = Integer.parseInt(ctx.getChild(2).getText()) - 1;
+            str = String.valueOf(num);
+        } else{
+            str = ctx.getChild(2).getText();
+        }
+
+        FileUtils.writeToFile(str, OUTPUT_FILE_PATH);
+        if(loop_aux_num2 > loop_aux_num){
+            FileUtils.writeToFile(", 1", OUTPUT_FILE_PATH);
+        }else{
+            FileUtils.writeToFile(", -1", OUTPUT_FILE_PATH);
+        }
+        FileUtils.writeToFile(")", OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(": \n", OUTPUT_FILE_PATH);
+    }
 
 
     // CONDICIONAL

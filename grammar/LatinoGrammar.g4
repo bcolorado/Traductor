@@ -3,7 +3,7 @@ grammar LatinoGrammar;
 
 // REGLAS SINTACTICAS
 main_program:   substatement;
-substatement: print_stat substatement | assign substatement | built_in_functions substatement | function_stat substatement | conditionals substatement |;
+substatement: print_stat substatement | assign substatement | built_in_functions substatement | function_stat substatement | conditionals substatement | loops substatement | ;
 
 // ASIGNACIÓN -------------------------------------------------------------------------------
 assign: ID assignmentOperator expr | ID assignAux expr | ID assignIncrDecr ;
@@ -44,6 +44,8 @@ array_content: expr array_content_aux | ;
 array_content_aux: TKN_COMMA expr array_content_aux | ;
 // CONDICIONALES --------------------------------------------------------------------------
 conditionals: if_conditional | swicth_condition;
+//BUCLES ----------------------------------------------------------------------------------
+loops: desde_loop;
 
 // IF
 
@@ -75,12 +77,38 @@ defaultClause:
 otherClause:
     'otro' TKN_COLON conditional_substatement romperOp;
 
-
-
 romperOp:
     'romper'
     | ;  // epsilon is represented by an empty alternative
 
+//BUCLE DESDE
+desde_loop: 'desde' TKN_OPENING_PAR triple_expr TKN_CLOSING_PAR loop_substatement 'fin'; //TODO: agregar identacion en lopp_substatement
+loop_substatement: substatement | ;
+triple_expr: loop_assign TKN_SEMICOLON loop_expr TKN_SEMICOLON  loop_assignIncrDecr;
+
+//ASIGNACION BUCLES
+loop_assign: id_aux TKN_ASSIGN (ID | NUM) ;
+id_aux: ID;
+
+loop_assignIncrDecr: ID(TKN_INCREMENT | TKN_DECREMENT) ;
+
+//EXPR BUCLES
+loop_expr: loop_expBool loop_exprRest;
+loop_exprRest: TKN_OR loop_expBool loop_exprRest |;
+loop_expBool: loop_expRel loop_expBoolRest;
+loop_expBoolRest: TKN_AND loop_expRel loop_expBoolRest |;
+loop_opRel: TKN_EQUAL | TKN_GEQ | TKN_GREATER | TKN_LEQ | TKN_LESS | TKN_NEQ;
+loop_expRel: (loop_exprConcat)(loop_opRel)(NUM | ID) | (loop_exprConcat);
+loop_exprConcat: loop_expArit (loop_exprConcatOp loop_expArit)*;
+loop_exprConcatOp: TKN_CONCAT;
+loop_expArit: loop_term (loop_expAritOp loop_term)*;
+loop_expAritOp: TKN_PLUS | TKN_MINUS;
+loop_term   :  loop_factor (loop_termOp loop_factor)*;
+loop_termOp: TKN_TIMES | TKN_DIV | TKN_MOD;
+loop_factor :  loop_t_factor(loop_factorOp loop_t_factor)*;
+loop_factorOp: TKN_POWER;
+loop_t_factor: (expr_factor)(loop_expr_terminals);
+loop_expr_terminals: NUM | ID | (TKN_OPENING_PAR)(loop_expr)(TKN_CLOSING_PAR) | STRING |;
 
 
 // EXPRESIONES -----------------------------------------------------------------------------

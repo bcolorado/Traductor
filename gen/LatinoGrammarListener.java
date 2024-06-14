@@ -1,4 +1,4 @@
-// Generated from /home/carlos/languages/Traductor/grammar/LatinoGrammar.g4 by ANTLR 4.13.1
+// Generated from C:/Users/Usuario/Desktop/Lenguajes/Traductor/Traductor/grammar/LatinoGrammar.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -307,6 +307,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitConditionals(LatinoGrammarParser.ConditionalsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loops}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoops(LatinoGrammarParser.LoopsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loops}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoops(LatinoGrammarParser.LoopsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#if_conditional}.
 	 * @param ctx the parse tree
 	 */
@@ -416,6 +426,226 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRomperOp(LatinoGrammarParser.RomperOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#desde_loop}.
+	 * @param ctx the parse tree
+	 */
+	void enterDesde_loop(LatinoGrammarParser.Desde_loopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#desde_loop}.
+	 * @param ctx the parse tree
+	 */
+	void exitDesde_loop(LatinoGrammarParser.Desde_loopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_substatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_substatement(LatinoGrammarParser.Loop_substatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_substatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_substatement(LatinoGrammarParser.Loop_substatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#triple_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterTriple_expr(LatinoGrammarParser.Triple_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#triple_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitTriple_expr(LatinoGrammarParser.Triple_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_assign(LatinoGrammarParser.Loop_assignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_assign(LatinoGrammarParser.Loop_assignContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#id_aux}.
+	 * @param ctx the parse tree
+	 */
+	void enterId_aux(LatinoGrammarParser.Id_auxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#id_aux}.
+	 * @param ctx the parse tree
+	 */
+	void exitId_aux(LatinoGrammarParser.Id_auxContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_assignIncrDecr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_assignIncrDecr(LatinoGrammarParser.Loop_assignIncrDecrContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_assignIncrDecr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_assignIncrDecr(LatinoGrammarParser.Loop_assignIncrDecrContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_expr(LatinoGrammarParser.Loop_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_expr(LatinoGrammarParser.Loop_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_exprRest}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_exprRest(LatinoGrammarParser.Loop_exprRestContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_exprRest}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_exprRest(LatinoGrammarParser.Loop_exprRestContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_expBool}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_expBool(LatinoGrammarParser.Loop_expBoolContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_expBool}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_expBool(LatinoGrammarParser.Loop_expBoolContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_expBoolRest}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_expBoolRest(LatinoGrammarParser.Loop_expBoolRestContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_expBoolRest}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_expBoolRest(LatinoGrammarParser.Loop_expBoolRestContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_opRel}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_opRel(LatinoGrammarParser.Loop_opRelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_opRel}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_opRel(LatinoGrammarParser.Loop_opRelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_expRel}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_expRel(LatinoGrammarParser.Loop_expRelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_expRel}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_expRel(LatinoGrammarParser.Loop_expRelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_exprConcat}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_exprConcat(LatinoGrammarParser.Loop_exprConcatContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_exprConcat}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_exprConcat(LatinoGrammarParser.Loop_exprConcatContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_exprConcatOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_exprConcatOp(LatinoGrammarParser.Loop_exprConcatOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_exprConcatOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_exprConcatOp(LatinoGrammarParser.Loop_exprConcatOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_expArit}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_expArit(LatinoGrammarParser.Loop_expAritContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_expArit}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_expArit(LatinoGrammarParser.Loop_expAritContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_expAritOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_expAritOp(LatinoGrammarParser.Loop_expAritOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_expAritOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_expAritOp(LatinoGrammarParser.Loop_expAritOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_term}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_term(LatinoGrammarParser.Loop_termContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_term}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_term(LatinoGrammarParser.Loop_termContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_termOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_termOp(LatinoGrammarParser.Loop_termOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_termOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_termOp(LatinoGrammarParser.Loop_termOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_factor}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_factor(LatinoGrammarParser.Loop_factorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_factor}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_factor(LatinoGrammarParser.Loop_factorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_factorOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_factorOp(LatinoGrammarParser.Loop_factorOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_factorOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_factorOp(LatinoGrammarParser.Loop_factorOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_t_factor}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_t_factor(LatinoGrammarParser.Loop_t_factorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_t_factor}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_t_factor(LatinoGrammarParser.Loop_t_factorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_expr_terminals}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_expr_terminals(LatinoGrammarParser.Loop_expr_terminalsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_expr_terminals}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_expr_terminals(LatinoGrammarParser.Loop_expr_terminalsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#expr}.
 	 * @param ctx the parse tree

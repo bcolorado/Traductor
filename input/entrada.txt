@@ -1,15 +1,3 @@
-calificacion = 'B'
-
-elegir(calificacion)
-
-  caso 'A':
-  caso 'B':
-  caso 'C':
-    escribir("¡Excelente!.")
-  caso 'D':
-    escribir("Necesitas mejorar.")
-  caso 'F':
-    escribir("Has reprobado.")
-  otro:
-    escribir("Calificación invalida.")
+desde (i = 0; i <= 10; i++)
+  escribir(i)
 fin
