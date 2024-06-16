@@ -1,1 +1,4 @@
-frutas = ["manzana", "uva", "cereza"]
+x = "Melvin"
+y = 2 + 3
+z = x..", "..y
+escribir(z)    //El resultado será Melvin, 5

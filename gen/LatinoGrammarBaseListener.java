@@ -1,4 +1,4 @@
-// Generated from C:/Users/Usuario/Desktop/Lenguajes/Traductor/Traductor/grammar/LatinoGrammar.g4 by ANTLR 4.13.1
+// Generated from /home/carlos/languages/Traductor/grammar/LatinoGrammar.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -112,6 +112,78 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMate_library(LatinoGrammarParser.Mate_libraryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMate_library(LatinoGrammarParser.Mate_libraryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMate_abs(LatinoGrammarParser.Mate_absContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMate_abs(LatinoGrammarParser.Mate_absContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMate_cos(LatinoGrammarParser.Mate_cosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMate_cos(LatinoGrammarParser.Mate_cosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMate_sin(LatinoGrammarParser.Mate_sinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMate_sin(LatinoGrammarParser.Mate_sinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMate_args(LatinoGrammarParser.Mate_argsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMate_args(LatinoGrammarParser.Mate_argsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMate_aux(LatinoGrammarParser.Mate_auxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMate_aux(LatinoGrammarParser.Mate_auxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBuilt_in_functions(LatinoGrammarParser.Built_in_functionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -191,6 +263,18 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAnumero_stat(LatinoGrammarParser.Anumero_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTipo_stat(LatinoGrammarParser.Tipo_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTipo_stat(LatinoGrammarParser.Tipo_statContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -395,6 +479,18 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunction_call(LatinoGrammarParser.Function_callContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_call_op(LatinoGrammarParser.Function_call_opContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_call_op(LatinoGrammarParser.Function_call_opContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1247,6 +1343,42 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpr_factor(LatinoGrammarParser.Expr_factorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpr_factor_not(LatinoGrammarParser.Expr_factor_notContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpr_factor_not(LatinoGrammarParser.Expr_factor_notContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpr_factor_minus(LatinoGrammarParser.Expr_factor_minusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpr_factor_minus(LatinoGrammarParser.Expr_factor_minusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpr_factor_plus(LatinoGrammarParser.Expr_factor_plusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpr_factor_plus(LatinoGrammarParser.Expr_factor_plusContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

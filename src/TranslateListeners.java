@@ -26,10 +26,45 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     private Integer fin_range_value = null;
     private Integer salto_range_value = null;
 
-
+    private boolean import_math = false;
 
     // ASIGNACIÓN --------------------------------------------------------------
 
+    //LIBRERIA ABS
+
+    @Override public void enterMate_abs(LatinoGrammarParser.Mate_absContext ctx) {
+        if(ctx.mate_args().TKN_MINUS() == null){
+            FileUtils.writeToFile("abs("+ctx.mate_args().NUM().getText()+")", OUTPUT_FILE_PATH);
+        }else{
+            FileUtils.writeToFile("abs("+"-"+ctx.mate_args().NUM().getText()+")", OUTPUT_FILE_PATH);
+        }
+
+    }
+
+    @Override public void enterMate_cos(LatinoGrammarParser.Mate_cosContext ctx) {
+        if(ctx.mate_args().TKN_MINUS() == null){
+            FileUtils.writeToFile("math.cos("+ctx.mate_args().NUM().getText()+")", OUTPUT_FILE_PATH);
+        }else{
+            FileUtils.writeToFile("math.cos("+"-"+ctx.mate_args().NUM().getText()+")", OUTPUT_FILE_PATH);
+        }
+
+    }
+
+    @Override public void enterMate_sin(LatinoGrammarParser.Mate_sinContext ctx) {
+        if(ctx.mate_args().TKN_MINUS() == null){
+            FileUtils.writeToFile("math.sin("+ctx.mate_args().NUM().getText()+")", OUTPUT_FILE_PATH);
+        }else{
+            FileUtils.writeToFile("math.sin("+"-"+ctx.mate_args().NUM().getText()+")", OUTPUT_FILE_PATH);
+        }
+
+    }
+
+    @Override public void enterAssign(LatinoGrammarParser.AssignContext ctx) {
+        if(ctx.mate_library() != null && !this.import_math ){
+            FileUtils.writeToFile("import math \n \n", OUTPUT_FILE_PATH);
+            this.import_math = true;
+        }
+    }
 
     @Override public void enterAssignOp(LatinoGrammarParser.AssignOpContext ctx) {
         if (ctx.accessMember() == null) {
@@ -64,6 +99,7 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
         FileUtils.writeToFile(ctx.getText(), OUTPUT_FILE_PATH);
     }
 
+    // MATH
 
     // FUNCIONES BUILT-IN ------------------------------------------------------------------------
     // ACADENA
@@ -102,13 +138,19 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     // IMPRESIÓN --------------------------------------------------------------
 
     @Override public void enterPrint_stat(LatinoGrammarParser.Print_statContext ctx) {
+        if(ctx.print_stat_cont() != null && !this.import_math ){
+            if(ctx.print_stat_cont().mate_library() != null){
+                FileUtils.writeToFile("import math \n \n", OUTPUT_FILE_PATH);
+                this.import_math = true;
+            }
+        }
         FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
         FileUtils.writeToFile("print(", OUTPUT_FILE_PATH);
     }
 
 
     @Override public void exitPrint_stat_cont(LatinoGrammarParser.Print_stat_contContext ctx) {
-        FileUtils.writeToFile(")\n", OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(",sep='')\n", OUTPUT_FILE_PATH);
     }
 
     @Override public void enterArray_printing(LatinoGrammarParser.Array_printingContext ctx) {
@@ -126,7 +168,17 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     }
 
     @Override public void enterExprConcatOp(LatinoGrammarParser.ExprConcatOpContext ctx) {
-        FileUtils.writeToFile(" + ", OUTPUT_FILE_PATH);
+        FileUtils.writeToFile(",", OUTPUT_FILE_PATH);
+    }
+
+    // TIPO
+
+    @Override public void enterTipo_stat(LatinoGrammarParser.Tipo_statContext ctx) {
+        FileUtils.writeToFile("type(", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void exitTipo_stat(LatinoGrammarParser.Tipo_statContext ctx) {
+        FileUtils.writeToFile(")", OUTPUT_FILE_PATH);
     }
 
     // FUNCIONES
@@ -144,6 +196,10 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
         FileUtils.writeToFile("):\n", OUTPUT_FILE_PATH);
     }
 
+    @Override public void enterFunction_content(LatinoGrammarParser.Function_contentContext ctx) {
+        identationLevel++;
+    }
+
 
 
     @Override public void enterFunction_args_aux(LatinoGrammarParser.Function_args_auxContext ctx) {
@@ -153,17 +209,15 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
 
     }
 
-    @Override public void enterFunction_content(LatinoGrammarParser.Function_contentContext ctx) {
-        FileUtils.writeToFile("\t", OUTPUT_FILE_PATH);
-        FileUtils.writeToFile(ctx.substatement().getText(), OUTPUT_FILE_PATH);
-    }
 
     @Override public void enterFunction_ret(LatinoGrammarParser.Function_retContext ctx) {
+        FileUtils.writeToFile("\t", OUTPUT_FILE_PATH);
         FileUtils.writeToFile("return ", OUTPUT_FILE_PATH);
     }
 
     @Override public void exitFunction_ret(LatinoGrammarParser.Function_retContext ctx) {
         FileUtils.writeToFile("\n", OUTPUT_FILE_PATH);
+        identationLevel--;
     }
 
     // ARRAY
@@ -538,16 +592,40 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
 
     // EXPRESIONES --------------------------------------------------------------
 
-    @Override public void enterExpr_factor(LatinoGrammarParser.Expr_factorContext ctx) {
-        if(ctx.getText() != null) {
-            FileUtils.writeToFile(ctx.getText(), OUTPUT_FILE_PATH);
-        }
+
+
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void exitExpr_factor_minus(LatinoGrammarParser.Expr_factor_minusContext ctx) {
+        FileUtils.writeToFile("-", OUTPUT_FILE_PATH);
+
     }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void enterExpr_factor_plus(LatinoGrammarParser.Expr_factor_plusContext ctx) {
+        FileUtils.writeToFile("-", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterExpr_factor_not(LatinoGrammarParser.Expr_factor_notContext ctx) {
+        FileUtils.writeToFile("not ", OUTPUT_FILE_PATH);
+    }
+
     @Override public void enterExpr_terminals(LatinoGrammarParser.Expr_terminalsContext ctx) {
         if(ctx.TKN_OPENING_PAR() != null) { // existe un parentesis
             FileUtils.writeToFile("(", OUTPUT_FILE_PATH);
-        } else if (ctx.acadena_stat() != null || ctx.anumero_stat() != null || ctx.alogico_stat() != null) {
+        } else if (ctx.acadena_stat() != null || ctx.anumero_stat() != null || ctx.alogico_stat() != null || ctx.tipo_stat() != null) {
             // Que no haga nada, ya esas funciones se escriben solas
+        } else if (ctx.getText().equals("verdadero")) {
+            FileUtils.writeToFile("True", OUTPUT_FILE_PATH);
+        } else if (ctx.getText().equals("falso")) {
+            FileUtils.writeToFile("False", OUTPUT_FILE_PATH);
         } else if(ctx.array() == null && ctx.dictionary() == null) {
             FileUtils.writeToFile(ctx.getText(), OUTPUT_FILE_PATH);
         }

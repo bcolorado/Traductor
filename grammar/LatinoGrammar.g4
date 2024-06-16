@@ -12,11 +12,19 @@ accessMember: ID TKN_PERIOD ID | longitud_method;
 
 
 // ASIGNACIÓN -------------------------------------------------------------------------------
-assign: assignOp assignmentOperator expr | assignOp assignAux expr | assignOp assignIncrDecr | assignOp array_printing ;
+assign: assignOp assignmentOperator expr | assignOp assignAux expr | assignOp assignIncrDecr | assignOp array_printing | assignOp assignAux mate_library;
 assignOp: ID | accessMember;
 assignAux: (TKN_COMMA)(ID)(assignAux)(expr)(TKN_COMMA) | TKN_ASSIGN;
 assignmentOperator: TKN_DIV_ASSIGN | TKN_MOD_ASSIGN| TKN_PLUS_ASSIGN| TKN_MINUS_ASSIGN| TKN_TIMES_ASSIGN;
 assignIncrDecr: TKN_INCREMENT | TKN_DECREMENT;
+
+//LIBRERIA MATE
+mate_library: mate_abs | mate_cos | mate_sin;
+mate_abs: 'mate.abs(' mate_args mate_aux ')';
+mate_cos: 'mate.cos(' mate_args mate_aux ')';
+mate_sin: 'mate.sen(' mate_args mate_aux ')';
+mate_args: NUM | '-' NUM | ID;
+mate_aux: |;
 
 // FUNCIONES BUILT-IN ---------------------------------------------------------------------
 built_in_functions:
@@ -27,12 +35,13 @@ leer_stat: 'leer' TKN_OPENING_PAR TKN_CLOSING_PAR ;
 limpiar_stat: 'limpiar' TKN_OPENING_PAR TKN_CLOSING_PAR ;
 alogico_stat: 'alogico' TKN_OPENING_PAR expr TKN_CLOSING_PAR;
 anumero_stat: 'anumero' TKN_OPENING_PAR expr TKN_CLOSING_PAR;
+tipo_stat: 'tipo' TKN_OPENING_PAR expr TKN_CLOSING_PAR;
 
 // IMPRESIÓN -------------------------------------------------------------------------------
 print_stat: print_operations TKN_OPENING_PAR print_stat_cont TKN_CLOSING_PAR;
-print_stat_cont: expr | array_printing | accessMember;
+print_stat_cont: expr | array_printing | accessMember | mate_library;
 print_operations: 'escribir' | 'imprimir' | 'poner';
-array_printing: ID TKN_OPENING_BRA ID TKN_CLOSING_BRA |;
+array_printing: ID TKN_OPENING_BRA (ID | NUM) TKN_CLOSING_BRA |;
 
 // FUNCIONES -------------------------------------------------------------------------------
 function_stat: function_op function_name function_pars function_content 'fin';
@@ -42,7 +51,7 @@ function_pars: TKN_OPENING_PAR function_args TKN_CLOSING_PAR;
 function_args: expr function_args_aux |;
 function_args_aux: TKN_COMMA expr function_args_aux | ;
 function_ret: function_ret_op expr;
-function_ret_op: 'retornar' | 'regresar' | 'ret';
+function_ret_op: 'retornar' | 'regresar' | 'ret' | 'retorno';
 function_content: substatement function_ret;
 
 //METODOS ESPECIALES
@@ -50,12 +59,13 @@ special_methods: longitud_method substatement | brakets substatement|;
 longitud_method: ('lista') (TKN_PERIOD) ('longitud') (TKN_OPENING_PAR) (ID) (TKN_CLOSING_PAR);
 brakets: TKN_OPENING_BRA ID TKN_CLOSING_BRA;
 
-function_call: ID TKN_OPENING_PAR function_args TKN_CLOSING_PAR;
+function_call: function_call_op TKN_OPENING_PAR function_args TKN_CLOSING_PAR;
+function_call_op: ID | accessMember;
 // ARREGLOS
 array: TKN_OPENING_BRA array_content TKN_CLOSING_BRA;
 array_expr: expr;
 array_content: array_expr array_content_aux | ;
-array_content_aux: TKN_COMMA array_expr array_content_aux | ;
+array_content_aux: TKN_COMMA array_expr array_content_aux | TKN_COMMA | ;
 
 // DICCIONARIOS
 dictionary: TKN_OPENING_KEY dictionary_content TKN_CLOSING_KEY;
@@ -172,9 +182,12 @@ factor :  t_factor(factorOp t_factor)*;
 factorOp: TKN_POWER;
 t_factor: (expr_factor)(expr_terminals);
 expr_terminals: NUM (brakets)* | ID (brakets)* | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR) | STRING |
-    anumero_stat | alogico_stat | acadena_stat | array | function_call | function_stat
+    anumero_stat | alogico_stat | acadena_stat | array | function_call | function_stat | tipo_stat |
     'verdadero' | 'falso' | dictionary ;
-expr_factor: (TKN_MINUS | TKN_PLUS | TKN_NOT)* ;
+expr_factor: (expr_factor_minus | expr_factor_plus | expr_factor_not)* ;
+expr_factor_not: TKN_NOT;
+expr_factor_minus: TKN_MINUS;
+expr_factor_plus:TKN_PLUS;
 
 
 
