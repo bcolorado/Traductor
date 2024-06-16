@@ -1,13 +1,1 @@
-calificacion='B'
-if calificacion== 'A':
-	print("¡Excelente!.")
-elif calificacion == 'B':
-	print("¡Bien echo!.")
-elif calificacion == 'C':
-	print("¡Bien echo!.")
-elif calificacion == 'D':
-	print("Necesitas mejorar.")
-elif calificacion == 'F':
-	print("Has reprobado.")
-else:
-	print("Calificación invalida.")
+frutas=["manzana","uva","cereza"]

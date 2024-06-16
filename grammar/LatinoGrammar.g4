@@ -115,8 +115,8 @@ repetir_aux2:|;
 //BUCLE RANGO
 rango_loop: 'para' ID 'en rango' TKN_OPENING_PAR inicio_value fin_value salto_value final_arguments loop_substatement 'fin';
 inicio_value: NUM | TKN_MINUS NUM;
-fin_value: ', ' NUM | ', ' TKN_MINUS NUM |;
-salto_value:', ' NUM | ', ' TKN_MINUS NUM |;
+fin_value: ',' NUM | ',' TKN_MINUS NUM |;
+salto_value:',' NUM | ',' TKN_MINUS NUM |;
 final_arguments: TKN_CLOSING_PAR;
 //BUCLE MIENTRAS
 mientras_loop: 'mientras' expr loop_substatement 'fin';
