@@ -497,6 +497,56 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitRepetir_aux2(LatinoGrammarParser.Repetir_aux2Context ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#rango_loop}.
+	 * @param ctx the parse tree
+	 */
+	void enterRango_loop(LatinoGrammarParser.Rango_loopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#rango_loop}.
+	 * @param ctx the parse tree
+	 */
+	void exitRango_loop(LatinoGrammarParser.Rango_loopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#inicio_value}.
+	 * @param ctx the parse tree
+	 */
+	void enterInicio_value(LatinoGrammarParser.Inicio_valueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#inicio_value}.
+	 * @param ctx the parse tree
+	 */
+	void exitInicio_value(LatinoGrammarParser.Inicio_valueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#fin_value}.
+	 * @param ctx the parse tree
+	 */
+	void enterFin_value(LatinoGrammarParser.Fin_valueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#fin_value}.
+	 * @param ctx the parse tree
+	 */
+	void exitFin_value(LatinoGrammarParser.Fin_valueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#salto_value}.
+	 * @param ctx the parse tree
+	 */
+	void enterSalto_value(LatinoGrammarParser.Salto_valueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#salto_value}.
+	 * @param ctx the parse tree
+	 */
+	void exitSalto_value(LatinoGrammarParser.Salto_valueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#final_arguments}.
+	 * @param ctx the parse tree
+	 */
+	void enterFinal_arguments(LatinoGrammarParser.Final_argumentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#final_arguments}.
+	 * @param ctx the parse tree
+	 */
+	void exitFinal_arguments(LatinoGrammarParser.Final_argumentsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#mientras_loop}.
 	 * @param ctx the parse tree
 	 */

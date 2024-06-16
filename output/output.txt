@@ -1,6 +1,4 @@
-i=0
-while True: 
-	print(i)
-	i += 1
-	if i == 10: 
-		break
+precio1=5
+precio2=6
+total=precio1+precio2
+print("El precio total es: " + total)

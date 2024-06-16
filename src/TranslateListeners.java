@@ -23,6 +23,8 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     private boolean desde_loop_flag_2 = true;
     private boolean longitud_flag = false;
     private String id_longitud = "";
+    private Integer fin_range_value = null;
+    private Integer salto_range_value = null;
 
     // ASIGNACIÓN --------------------------------------------------------------
     @Override public void enterAssign(LatinoGrammarParser.AssignContext ctx) {
@@ -343,6 +345,49 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     @Override public void enterRepetir_aux2(LatinoGrammarParser.Repetir_aux2Context ctx) {
         FileUtils.writeToFile(": \n", OUTPUT_FILE_PATH);
         FileUtils.writeToFile("\t".repeat(identationLevel+2)+"break", OUTPUT_FILE_PATH);
+    }
+
+    //BUCLE RANGO
+
+    @Override public void enterRango_loop(LatinoGrammarParser.Rango_loopContext ctx) {
+        FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile("for "+ctx.ID().getText()+" in range (", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterInicio_value(LatinoGrammarParser.Inicio_valueContext ctx) {
+        if(ctx.TKN_MINUS() == null){
+            FileUtils.writeToFile(ctx.NUM().getText(), OUTPUT_FILE_PATH);
+        }else{
+            FileUtils.writeToFile('-'+ctx.NUM().getText(), OUTPUT_FILE_PATH);
+        }
+
+    }
+
+    @Override public void enterFin_value(LatinoGrammarParser.Fin_valueContext ctx) {
+        if(ctx.NUM() != null){
+            if(ctx.TKN_MINUS() == null){
+                FileUtils.writeToFile(", "+ctx.NUM().getText(), OUTPUT_FILE_PATH);
+            }else{
+                FileUtils.writeToFile(", -"+ctx.NUM().getText(), OUTPUT_FILE_PATH);
+            }
+
+        }
+
+    }
+
+    @Override public void enterSalto_value(LatinoGrammarParser.Salto_valueContext ctx) {
+        if(ctx.NUM() != null){
+            if(ctx.TKN_MINUS() == null){
+                FileUtils.writeToFile(", "+ctx.NUM().getText(), OUTPUT_FILE_PATH);
+            }else{
+                FileUtils.writeToFile(", -"+ctx.NUM().getText(), OUTPUT_FILE_PATH);
+            }
+        }
+
+    }
+
+    @Override public void enterFinal_arguments(LatinoGrammarParser.Final_argumentsContext ctx) {
+        FileUtils.writeToFile("): \n", OUTPUT_FILE_PATH);
     }
 
 

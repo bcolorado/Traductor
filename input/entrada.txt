@@ -1,6 +1,4 @@
-i=0
-
-repetir
-  escribir(i)
-  i++            //incrementamos el valor de i
-hasta i == 10
+precio1 = 5
+precio2 = 6
+total = precio1 + precio2
+escribir("El precio total es: " .. total)
