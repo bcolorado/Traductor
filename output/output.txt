@@ -1,4 +1,13 @@
-precio1=5
-precio2=6
-total=precio1+precio2
-print("El precio total es: " + total)
+calificacion='B'
+if calificacion== 'A':
+	print("¡Excelente!.")
+elif calificacion == 'B':
+	print("¡Bien echo!.")
+elif calificacion == 'C':
+	print("¡Bien echo!.")
+elif calificacion == 'D':
+	print("Necesitas mejorar.")
+elif calificacion == 'F':
+	print("Has reprobado.")
+else:
+	print("Calificación invalida.")

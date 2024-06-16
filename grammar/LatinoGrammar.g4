@@ -3,10 +3,17 @@ grammar LatinoGrammar;
 
 // REGLAS SINTACTICAS
 main_program:   substatement;
-substatement: print_stat substatement | assign substatement | built_in_functions substatement | function_stat substatement | special_methods | conditionals substatement | loops substatement | ;
+substatement: print_stat substatement | assign substatement | built_in_functions substatement | function_stat substatement |
+special_methods | conditionals substatement | loops substatement | accessMember substatement | ;
+
+
+// ACCEDER MIEMBRO
+accessMember: ID TKN_PERIOD ID | longitud_method;
+
 
 // ASIGNACIÓN -------------------------------------------------------------------------------
-assign: ID assignmentOperator expr | ID assignAux expr | ID assignIncrDecr | ID array_printing ;
+assign: assignOp assignmentOperator expr | assignOp assignAux expr | assignOp assignIncrDecr | assignOp array_printing ;
+assignOp: ID | accessMember;
 assignAux: (TKN_COMMA)(ID)(assignAux)(expr)(TKN_COMMA) | TKN_ASSIGN;
 assignmentOperator: TKN_DIV_ASSIGN | TKN_MOD_ASSIGN| TKN_PLUS_ASSIGN| TKN_MINUS_ASSIGN| TKN_TIMES_ASSIGN;
 assignIncrDecr: TKN_INCREMENT | TKN_DECREMENT;
@@ -23,7 +30,7 @@ anumero_stat: 'anumero' TKN_OPENING_PAR expr TKN_CLOSING_PAR;
 
 // IMPRESIÓN -------------------------------------------------------------------------------
 print_stat: print_operations TKN_OPENING_PAR print_stat_cont TKN_CLOSING_PAR;
-print_stat_cont: expr | array_printing ;
+print_stat_cont: expr | array_printing | accessMember;
 print_operations: 'escribir' | 'imprimir' | 'poner';
 array_printing: ID TKN_OPENING_BRA ID TKN_CLOSING_BRA |;
 
@@ -46,8 +53,18 @@ brakets: TKN_OPENING_BRA ID TKN_CLOSING_BRA;
 function_call: ID TKN_OPENING_PAR function_args TKN_CLOSING_PAR;
 // ARREGLOS
 array: TKN_OPENING_BRA array_content TKN_CLOSING_BRA;
-array_content: expr array_content_aux | ;
-array_content_aux: TKN_COMMA expr array_content_aux | ;
+array_expr: expr;
+array_content: array_expr array_content_aux | ;
+array_content_aux: TKN_COMMA array_expr array_content_aux | ;
+
+// DICCIONARIOS
+dictionary: TKN_OPENING_KEY dictionary_content TKN_CLOSING_KEY;
+dictionary_content: dictionary_expr_key TKN_COLON dictionary_expr_value dictionary_content_aux;
+dictionary_expr_key: expr;
+dictionary_expr_value: expr;
+dictionary_content_aux: TKN_COMMA dictionary_expr_key TKN_COLON dictionary_expr_value dictionary_content_aux |;
+
+
 
 // CONDICIONALES --------------------------------------------------------------------------
 conditionals: if_conditional | swicth_condition;
@@ -124,7 +141,7 @@ loop_expr: loop_expBool loop_exprRest;
 loop_exprRest: TKN_OR loop_expBool loop_exprRest |;
 loop_expBool: loop_expRel loop_expBoolRest;
 loop_expBoolRest: TKN_AND loop_expRel loop_expBoolRest |;
-loop_opRel: TKN_EQUAL | TKN_GEQ | TKN_GREATER | TKN_LEQ | TKN_LESS | TKN_NEQ;
+loop_opRel: TKN_EQUAL | TKN_GEQ | TKN_GREATER | TKN_LEQ | TKN_LESS | TKN_NEQ ;
 loop_expRel: (loop_exprConcat)(loop_opRel)(NUM | ID | special_methods) | (loop_exprConcat);
 loop_exprConcat: loop_expArit (loop_exprConcatOp loop_expArit)*;
 loop_exprConcatOp: TKN_CONCAT;
@@ -143,7 +160,7 @@ expr: expBool exprRest;
 exprRest: TKN_OR expBool exprRest |;
 expBool: expRel expBoolRest;
 expBoolRest: TKN_AND expRel expBoolRest |;
-opRel: TKN_EQUAL | TKN_GEQ | TKN_GREATER | TKN_LEQ | TKN_LESS | TKN_NEQ;
+opRel: TKN_EQUAL | TKN_GEQ | TKN_GREATER | TKN_LEQ | TKN_LESS | TKN_NEQ | TKN_REGEX;
 expRel: (exprConcat)(opRel)(exprConcat | special_methods) | (exprConcat);
 exprConcat: expArit (exprConcatOp expArit)* ;
 exprConcatOp: TKN_CONCAT;
@@ -156,7 +173,7 @@ factorOp: TKN_POWER;
 t_factor: (expr_factor)(expr_terminals);
 expr_terminals: NUM (brakets)* | ID (brakets)* | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR) | STRING |
     anumero_stat | alogico_stat | acadena_stat | array | function_call | function_stat
-    'verdadero' | 'falso';
+    'verdadero' | 'falso' | dictionary ;
 expr_factor: (TKN_MINUS | TKN_PLUS | TKN_NOT)* ;
 
 
@@ -209,4 +226,5 @@ ID    : [a-zA-Z_][0-9a-zA-Z_]*;
 fragment DIGIT  : [0-9];
 ESPACIO: [ \t\r\n]+ -> skip;
 COMMENT_LINE: '//' ~[\r\n]* -> skip;
+COMMENT_LINE_NUMERAL: '#' ~[\r\n]* -> skip;
 COMMENT_BLOCK: '/*' .*? '*/' -> skip;

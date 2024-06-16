@@ -26,10 +26,17 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     private Integer fin_range_value = null;
     private Integer salto_range_value = null;
 
+
+
     // ASIGNACIÓN --------------------------------------------------------------
-    @Override public void enterAssign(LatinoGrammarParser.AssignContext ctx) {
+
+
+    @Override public void enterAssignOp(LatinoGrammarParser.AssignOpContext ctx) {
+        if (ctx.accessMember() == null) {
             FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
             FileUtils.writeToFile(ctx.ID().getText(), OUTPUT_FILE_PATH);
+        }
+
     }
 
     @Override public void exitAssign(LatinoGrammarParser.AssignContext ctx) {
@@ -160,6 +167,47 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     }
 
     // ARRAY
+    @Override public void enterArray(LatinoGrammarParser.ArrayContext ctx) {
+        FileUtils.writeToFile("[", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void exitArray(LatinoGrammarParser.ArrayContext ctx) {
+        FileUtils.writeToFile("]", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterArray_content_aux(LatinoGrammarParser.Array_content_auxContext ctx) {
+        if(ctx.TKN_COMMA() != null) {
+            FileUtils.writeToFile(",", OUTPUT_FILE_PATH);
+        }
+    }
+
+    // DICTIONARY
+    @Override public void enterDictionary(LatinoGrammarParser.DictionaryContext ctx) {
+        FileUtils.writeToFile("{", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void exitDictionary(LatinoGrammarParser.DictionaryContext ctx) {
+        FileUtils.writeToFile("}", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterDictionary_content_aux(LatinoGrammarParser.Dictionary_content_auxContext ctx) {
+        if(ctx.TKN_COMMA() != null) {
+            FileUtils.writeToFile(",", OUTPUT_FILE_PATH);
+        }
+    }
+
+    // ACCESS MEBER
+
+    @Override public void enterAccessMember(LatinoGrammarParser.AccessMemberContext ctx) {
+        FileUtils.writeToFile(ctx.ID(0).getText(), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile("[\""+ctx.ID(1)+ "\"]", OUTPUT_FILE_PATH);
+    }
+
+
+    @Override public void exitDictionary_expr_key(LatinoGrammarParser.Dictionary_expr_keyContext ctx) {
+        FileUtils.writeToFile(":", OUTPUT_FILE_PATH);
+    }
+
 
 
     // BUCLES --------------------------------------------------------------
@@ -500,7 +548,7 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
             FileUtils.writeToFile("(", OUTPUT_FILE_PATH);
         } else if (ctx.acadena_stat() != null || ctx.anumero_stat() != null || ctx.alogico_stat() != null) {
             // Que no haga nada, ya esas funciones se escriben solas
-        } else {
+        } else if(ctx.array() == null && ctx.dictionary() == null) {
             FileUtils.writeToFile(ctx.getText(), OUTPUT_FILE_PATH);
         }
     }

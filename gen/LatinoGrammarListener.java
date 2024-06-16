@@ -1,4 +1,4 @@
-// Generated from C:/Users/Usuario/Desktop/Lenguajes/Traductor/Traductor/grammar/LatinoGrammar.g4 by ANTLR 4.13.1
+// Generated from /home/carlos/languages/Traductor/grammar/LatinoGrammar.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -27,6 +27,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitSubstatement(LatinoGrammarParser.SubstatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#accessMember}.
+	 * @param ctx the parse tree
+	 */
+	void enterAccessMember(LatinoGrammarParser.AccessMemberContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#accessMember}.
+	 * @param ctx the parse tree
+	 */
+	void exitAccessMember(LatinoGrammarParser.AccessMemberContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#assign}.
 	 * @param ctx the parse tree
 	 */
@@ -36,6 +46,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssign(LatinoGrammarParser.AssignContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#assignOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignOp(LatinoGrammarParser.AssignOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#assignOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignOp(LatinoGrammarParser.AssignOpContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#assignAux}.
 	 * @param ctx the parse tree
@@ -317,6 +337,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitArray(LatinoGrammarParser.ArrayContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#array_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray_expr(LatinoGrammarParser.Array_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#array_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray_expr(LatinoGrammarParser.Array_exprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#array_content}.
 	 * @param ctx the parse tree
 	 */
@@ -336,6 +366,56 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArray_content_aux(LatinoGrammarParser.Array_content_auxContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#dictionary}.
+	 * @param ctx the parse tree
+	 */
+	void enterDictionary(LatinoGrammarParser.DictionaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#dictionary}.
+	 * @param ctx the parse tree
+	 */
+	void exitDictionary(LatinoGrammarParser.DictionaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#dictionary_content}.
+	 * @param ctx the parse tree
+	 */
+	void enterDictionary_content(LatinoGrammarParser.Dictionary_contentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#dictionary_content}.
+	 * @param ctx the parse tree
+	 */
+	void exitDictionary_content(LatinoGrammarParser.Dictionary_contentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#dictionary_expr_key}.
+	 * @param ctx the parse tree
+	 */
+	void enterDictionary_expr_key(LatinoGrammarParser.Dictionary_expr_keyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#dictionary_expr_key}.
+	 * @param ctx the parse tree
+	 */
+	void exitDictionary_expr_key(LatinoGrammarParser.Dictionary_expr_keyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#dictionary_expr_value}.
+	 * @param ctx the parse tree
+	 */
+	void enterDictionary_expr_value(LatinoGrammarParser.Dictionary_expr_valueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#dictionary_expr_value}.
+	 * @param ctx the parse tree
+	 */
+	void exitDictionary_expr_value(LatinoGrammarParser.Dictionary_expr_valueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#dictionary_content_aux}.
+	 * @param ctx the parse tree
+	 */
+	void enterDictionary_content_aux(LatinoGrammarParser.Dictionary_content_auxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#dictionary_content_aux}.
+	 * @param ctx the parse tree
+	 */
+	void exitDictionary_content_aux(LatinoGrammarParser.Dictionary_content_auxContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#conditionals}.
 	 * @param ctx the parse tree
