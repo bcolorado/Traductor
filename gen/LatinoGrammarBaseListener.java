@@ -208,6 +208,18 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArray_printing(LatinoGrammarParser.Array_printingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArray_printing(LatinoGrammarParser.Array_printingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunction_stat(LatinoGrammarParser.Function_statContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -311,6 +323,42 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunction_content(LatinoGrammarParser.Function_contentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSpecial_methods(LatinoGrammarParser.Special_methodsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSpecial_methods(LatinoGrammarParser.Special_methodsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLongitud_method(LatinoGrammarParser.Longitud_methodContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLongitud_method(LatinoGrammarParser.Longitud_methodContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBrakets(LatinoGrammarParser.BraketsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBrakets(LatinoGrammarParser.BraketsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -520,6 +568,18 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMientras_loop(LatinoGrammarParser.Mientras_loopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMientras_loop(LatinoGrammarParser.Mientras_loopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDesde_loop(LatinoGrammarParser.Desde_loopContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -568,13 +628,25 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterId_aux(LatinoGrammarParser.Id_auxContext ctx) { }
+	@Override public void enterLoop_assignAux(LatinoGrammarParser.Loop_assignAuxContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitId_aux(LatinoGrammarParser.Id_auxContext ctx) { }
+	@Override public void exitLoop_assignAux(LatinoGrammarParser.Loop_assignAuxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLoop_assignmentOperator(LatinoGrammarParser.Loop_assignmentOperatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLoop_assignmentOperator(LatinoGrammarParser.Loop_assignmentOperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

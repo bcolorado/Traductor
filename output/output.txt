@@ -1,2 +1,7 @@
-for i in range(0, 11, 1): 
-	print(i)
+carros=["BMW","Volvo","Ford","Nissan"]"BMW""Volvo""Ford""Nissan"
+i=0
+texto=""
+while (i < len( carros)): 
+	texto=texto + carros[i] + "\n"
+	i += 1
+print(texto)

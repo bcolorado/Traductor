@@ -3,10 +3,10 @@ grammar LatinoGrammar;
 
 // REGLAS SINTACTICAS
 main_program:   substatement;
-substatement: print_stat substatement | assign substatement | built_in_functions substatement | function_stat substatement | conditionals substatement | loops substatement | ;
+substatement: print_stat substatement | assign substatement | built_in_functions substatement | function_stat substatement | special_methods | conditionals substatement | loops substatement | ;
 
 // ASIGNACIÓN -------------------------------------------------------------------------------
-assign: ID assignmentOperator expr | ID assignAux expr | ID assignIncrDecr ;
+assign: ID assignmentOperator expr | ID assignAux expr | ID assignIncrDecr | ID array_printing ;
 assignAux: (TKN_COMMA)(ID)(assignAux)(expr)(TKN_COMMA) | TKN_ASSIGN;
 assignmentOperator: TKN_DIV_ASSIGN | TKN_MOD_ASSIGN| TKN_PLUS_ASSIGN| TKN_MINUS_ASSIGN| TKN_TIMES_ASSIGN;
 assignIncrDecr: TKN_INCREMENT | TKN_DECREMENT;
@@ -23,8 +23,9 @@ anumero_stat: 'anumero' TKN_OPENING_PAR expr TKN_CLOSING_PAR;
 
 // IMPRESIÓN -------------------------------------------------------------------------------
 print_stat: print_operations TKN_OPENING_PAR print_stat_cont TKN_CLOSING_PAR;
-print_stat_cont: expr;
+print_stat_cont: expr | array_printing ;
 print_operations: 'escribir' | 'imprimir' | 'poner';
+array_printing: ID TKN_OPENING_BRA ID TKN_CLOSING_BRA |;
 
 // FUNCIONES -------------------------------------------------------------------------------
 function_stat: function_op function_name function_pars function_content 'fin';
@@ -37,15 +38,21 @@ function_ret: function_ret_op expr;
 function_ret_op: 'retornar' | 'regresar' | 'ret';
 function_content: substatement function_ret;
 
+//METODOS ESPECIALES
+special_methods: longitud_method substatement | brakets substatement|;
+longitud_method: ('lista') (TKN_PERIOD) ('longitud') (TKN_OPENING_PAR) (ID) (TKN_CLOSING_PAR);
+brakets: TKN_OPENING_BRA ID TKN_CLOSING_BRA;
+
 function_call: ID TKN_OPENING_PAR function_args TKN_CLOSING_PAR;
 // ARREGLOS
 array: TKN_OPENING_BRA array_content TKN_CLOSING_BRA;
 array_content: expr array_content_aux | ;
 array_content_aux: TKN_COMMA expr array_content_aux | ;
+
 // CONDICIONALES --------------------------------------------------------------------------
 conditionals: if_conditional | swicth_condition;
 //BUCLES ----------------------------------------------------------------------------------
-loops: desde_loop;
+loops: desde_loop | mientras_loop;
 
 // IF
 
@@ -81,16 +88,24 @@ romperOp:
     'romper'
     | ;  // epsilon is represented by an empty alternative
 
+
+//BUCLE MIENTRAS
+mientras_loop: 'mientras' expr loop_substatement 'fin';
 //BUCLE DESDE
-desde_loop: 'desde' TKN_OPENING_PAR triple_expr TKN_CLOSING_PAR loop_substatement 'fin'; //TODO: agregar identacion en lopp_substatement
+desde_loop: 'desde' TKN_OPENING_PAR triple_expr TKN_CLOSING_PAR loop_substatement 'fin';
 loop_substatement: substatement | ;
-triple_expr: loop_assign TKN_SEMICOLON loop_expr TKN_SEMICOLON  loop_assignIncrDecr;
+triple_expr: loop_assign TKN_SEMICOLON loop_expr TKN_SEMICOLON  (loop_assign | loop_assignIncrDecr);
 
 //ASIGNACION BUCLES
-loop_assign: id_aux TKN_ASSIGN (ID | NUM) ;
-id_aux: ID;
+//loop_assign: id_aux TKN_ASSIGN (ID | NUM) ;
+//id_aux: ID;
+loop_assign: ID loop_assignmentOperator loop_expr | ID loop_assignAux loop_expr  ;
+loop_assignAux: (TKN_COMMA)(ID)(assignAux)(expr)(TKN_COMMA) | TKN_ASSIGN;
+loop_assignmentOperator: TKN_DIV_ASSIGN | TKN_MOD_ASSIGN| TKN_PLUS_ASSIGN| TKN_MINUS_ASSIGN| TKN_TIMES_ASSIGN;
+loop_assignIncrDecr: ID (TKN_INCREMENT | TKN_DECREMENT);
 
-loop_assignIncrDecr: ID(TKN_INCREMENT | TKN_DECREMENT) ;
+
+//loop_assignIncrDecr: ID(TKN_INCREMENT | TKN_DECREMENT) ;
 
 //EXPR BUCLES
 loop_expr: loop_expBool loop_exprRest;
@@ -98,7 +113,7 @@ loop_exprRest: TKN_OR loop_expBool loop_exprRest |;
 loop_expBool: loop_expRel loop_expBoolRest;
 loop_expBoolRest: TKN_AND loop_expRel loop_expBoolRest |;
 loop_opRel: TKN_EQUAL | TKN_GEQ | TKN_GREATER | TKN_LEQ | TKN_LESS | TKN_NEQ;
-loop_expRel: (loop_exprConcat)(loop_opRel)(NUM | ID) | (loop_exprConcat);
+loop_expRel: (loop_exprConcat)(loop_opRel)(NUM | ID | special_methods) | (loop_exprConcat);
 loop_exprConcat: loop_expArit (loop_exprConcatOp loop_expArit)*;
 loop_exprConcatOp: TKN_CONCAT;
 loop_expArit: loop_term (loop_expAritOp loop_term)*;
@@ -108,7 +123,7 @@ loop_termOp: TKN_TIMES | TKN_DIV | TKN_MOD;
 loop_factor :  loop_t_factor(loop_factorOp loop_t_factor)*;
 loop_factorOp: TKN_POWER;
 loop_t_factor: (expr_factor)(loop_expr_terminals);
-loop_expr_terminals: NUM | ID | (TKN_OPENING_PAR)(loop_expr)(TKN_CLOSING_PAR) | STRING |;
+loop_expr_terminals: NUM (brakets)* | ID (brakets)* | (TKN_OPENING_PAR)(loop_expr)(TKN_CLOSING_PAR) | STRING |;
 
 
 // EXPRESIONES -----------------------------------------------------------------------------
@@ -117,8 +132,8 @@ exprRest: TKN_OR expBool exprRest |;
 expBool: expRel expBoolRest;
 expBoolRest: TKN_AND expRel expBoolRest |;
 opRel: TKN_EQUAL | TKN_GEQ | TKN_GREATER | TKN_LEQ | TKN_LESS | TKN_NEQ;
-expRel: (exprConcat)(opRel)(exprConcat) | (exprConcat);
-exprConcat: expArit (exprConcatOp expArit)*;
+expRel: (exprConcat)(opRel)(exprConcat | special_methods) | (exprConcat);
+exprConcat: expArit (exprConcatOp expArit)* ;
 exprConcatOp: TKN_CONCAT;
 expArit: term (expAritOp term)*;
 expAritOp: TKN_PLUS | TKN_MINUS;
@@ -127,10 +142,11 @@ termOp: TKN_TIMES | TKN_DIV | TKN_MOD;
 factor :  t_factor(factorOp t_factor)*;
 factorOp: TKN_POWER;
 t_factor: (expr_factor)(expr_terminals);
-expr_terminals: NUM | ID | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR) | STRING |
+expr_terminals: NUM (brakets)* | ID (brakets)* | (TKN_OPENING_PAR)(expr)(TKN_CLOSING_PAR) | STRING |
     anumero_stat | alogico_stat | acadena_stat | array | function_call | function_stat
     'verdadero' | 'falso';
 expr_factor: (TKN_MINUS | TKN_PLUS | TKN_NOT)* ;
+
 
 
 

@@ -167,6 +167,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitPrint_operations(LatinoGrammarParser.Print_operationsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#array_printing}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray_printing(LatinoGrammarParser.Array_printingContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#array_printing}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray_printing(LatinoGrammarParser.Array_printingContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_stat}.
 	 * @param ctx the parse tree
 	 */
@@ -256,6 +266,36 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunction_content(LatinoGrammarParser.Function_contentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#special_methods}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecial_methods(LatinoGrammarParser.Special_methodsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#special_methods}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecial_methods(LatinoGrammarParser.Special_methodsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#longitud_method}.
+	 * @param ctx the parse tree
+	 */
+	void enterLongitud_method(LatinoGrammarParser.Longitud_methodContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#longitud_method}.
+	 * @param ctx the parse tree
+	 */
+	void exitLongitud_method(LatinoGrammarParser.Longitud_methodContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#brakets}.
+	 * @param ctx the parse tree
+	 */
+	void enterBrakets(LatinoGrammarParser.BraketsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#brakets}.
+	 * @param ctx the parse tree
+	 */
+	void exitBrakets(LatinoGrammarParser.BraketsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#function_call}.
 	 * @param ctx the parse tree
@@ -427,6 +467,16 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitRomperOp(LatinoGrammarParser.RomperOpContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#mientras_loop}.
+	 * @param ctx the parse tree
+	 */
+	void enterMientras_loop(LatinoGrammarParser.Mientras_loopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#mientras_loop}.
+	 * @param ctx the parse tree
+	 */
+	void exitMientras_loop(LatinoGrammarParser.Mientras_loopContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#desde_loop}.
 	 * @param ctx the parse tree
 	 */
@@ -467,15 +517,25 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitLoop_assign(LatinoGrammarParser.Loop_assignContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LatinoGrammarParser#id_aux}.
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_assignAux}.
 	 * @param ctx the parse tree
 	 */
-	void enterId_aux(LatinoGrammarParser.Id_auxContext ctx);
+	void enterLoop_assignAux(LatinoGrammarParser.Loop_assignAuxContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link LatinoGrammarParser#id_aux}.
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_assignAux}.
 	 * @param ctx the parse tree
 	 */
-	void exitId_aux(LatinoGrammarParser.Id_auxContext ctx);
+	void exitLoop_assignAux(LatinoGrammarParser.Loop_assignAuxContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_assignmentOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoop_assignmentOperator(LatinoGrammarParser.Loop_assignmentOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#loop_assignmentOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoop_assignmentOperator(LatinoGrammarParser.Loop_assignmentOperatorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#loop_assignIncrDecr}.
 	 * @param ctx the parse tree

@@ -1,5 +1,6 @@
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.List;
 import javax.print.DocFlavor;
@@ -12,8 +13,14 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     private String switchExpression = null;
     private boolean pastCaseEmpty = false;
     private int loop_aux_num = 0;
-    private int loop_aux_num2 = 0;
+    private int loop_aux_num2 = 15;
+    private int loop_aux_num3 = 0;
     private boolean desde_loop_flag = false;
+    private boolean hasLoopAssignIncrDecr = false;
+    private int loop_assign_number = 0;
+    private boolean desde_loop_flag_2 = true;
+    private boolean longitud_flag = false;
+    private String id_longitud = "";
 
     // ASIGNACIÓN --------------------------------------------------------------
     @Override public void enterAssign(LatinoGrammarParser.AssignContext ctx) {
@@ -93,6 +100,20 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
         FileUtils.writeToFile(")\n", OUTPUT_FILE_PATH);
     }
 
+    @Override public void enterArray_printing(LatinoGrammarParser.Array_printingContext ctx) {
+        StringBuilder sb = new StringBuilder();
+
+        // Iterar sobre los hijos del contexto ctx
+        for (ParseTree child : ctx.children) {
+            // Obtener el texto del nodo hijo y concatenarlo a la cadena acumuladora
+            sb.append(child.getText());
+        }
+
+        // Convertir StringBuilder a String
+        String concatenatedString = sb.toString();
+        FileUtils.writeToFile(concatenatedString, OUTPUT_FILE_PATH);
+    }
+
     @Override public void enterExprConcatOp(LatinoGrammarParser.ExprConcatOpContext ctx) {
         FileUtils.writeToFile(" + ", OUTPUT_FILE_PATH);
     }
@@ -139,48 +160,160 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
 
     // BUCLES --------------------------------------------------------------
 
+
+    //DESDE
     @Override public void enterLoop_substatement(LatinoGrammarParser.Loop_substatementContext ctx) {
+        if(ctx.getParent() instanceof LatinoGrammarParser.Mientras_loopContext){
+            FileUtils.writeToFile(": \n", OUTPUT_FILE_PATH);
+        }
         identationLevel++;
+    }
+
+    @Override public void exitLoop_substatement(LatinoGrammarParser.Loop_substatementContext ctx) {
+        identationLevel--;
     }
     @Override public void enterDesde_loop(LatinoGrammarParser.Desde_loopContext ctx) {
         FileUtils.writeToFile("\t".repeat(identationLevel), OUTPUT_FILE_PATH);
         FileUtils.writeToFile("for ", OUTPUT_FILE_PATH);
     }
 
+    @Override public void enterLongitud_method(LatinoGrammarParser.Longitud_methodContext ctx) {
+        if(!desde_loop_flag){
+            FileUtils.writeToFile("len( "+ctx.ID()+")", OUTPUT_FILE_PATH);
+        }
+
+    }
 
     @Override public void exitDesde_loop(LatinoGrammarParser.Desde_loopContext ctx) { }
 
     @Override public void enterLoop_assign(LatinoGrammarParser.Loop_assignContext ctx) {
-        this.loop_aux_num = Integer.parseInt(ctx.getChild(2).getText());
 
-        FileUtils.writeToFile(ctx.id_aux().getText(), OUTPUT_FILE_PATH);
-        FileUtils.writeToFile(" in range(", OUTPUT_FILE_PATH);
-        FileUtils.writeToFile(ctx.getChild(2).getText(), OUTPUT_FILE_PATH);
-        FileUtils.writeToFile(", ", OUTPUT_FILE_PATH);
+//        this.loop_aux_num = Integer.parseInt(ctx.getChild(2).getText());
+        if(!desde_loop_flag){ //falso si es la primera signacion del desde
+            FileUtils.writeToFile(ctx.ID().getText(), OUTPUT_FILE_PATH);
+            FileUtils.writeToFile(" in range(", OUTPUT_FILE_PATH);
+            Integer numValue = findNumNode(ctx);
+            if (numValue != null) {
+                this.loop_aux_num2 = numValue;
+            }
+            FileUtils.writeToFile(this.loop_aux_num2+"", OUTPUT_FILE_PATH);
+            FileUtils.writeToFile(", ", OUTPUT_FILE_PATH);
+            this.loop_aux_num3 = loop_aux_num2;
+
+        }
+
+    }
+
+    @Override public void enterSpecial_methods(LatinoGrammarParser.Special_methodsContext ctx) { }
+
+
+
+    @Override public void exitLoop_assign(LatinoGrammarParser.Loop_assignContext ctx) {
     }
 
     @Override public void enterLoop_expRel(LatinoGrammarParser.Loop_expRelContext ctx) {
-        this.loop_aux_num2 = Integer.parseInt(ctx.getChild(2).getText());
-        String str = "";
+        /*this.loop_aux_num2 = Integer.parseInt(ctx.getChild(4).getChild(1).getChild(0).getText());
+        FileUtils.writeToFile("aquiiii "+this.loop_aux_num2, OUTPUT_FILE_PATH);
+        String str = "";*/
 
-        if(ctx.getChild(1).getText().equals("<=")) {
-            int num = Integer.parseInt(ctx.getChild(2).getText()) + 1;
-            str = String.valueOf(num);
-        }else if(ctx.getChild(1).getText().equals(">=")){
-            int num = Integer.parseInt(ctx.getChild(2).getText()) - 1;
-            str = String.valueOf(num);
-        } else{
-            str = ctx.getChild(2).getText();
-        }
+        // Buscamos el nodo NUM dentro de los hijos de loop_expRel
+        Integer numValue = findNumNode(ctx);
+//        System.out.println(numValue);
+        String comparator_tkn = "";
+        if(ctx.getChild(2) instanceof LatinoGrammarParser.Special_methodsContext){
+            this.loop_aux_num2 = 9999;
+            this.longitud_flag = true;
+            this.id_longitud = ctx.special_methods().longitud_method().ID().getText();
+            System.out.println(this.id_longitud);
 
-        FileUtils.writeToFile(str, OUTPUT_FILE_PATH);
-        if(loop_aux_num2 > loop_aux_num){
-            FileUtils.writeToFile(", 1", OUTPUT_FILE_PATH);
         }else{
-            FileUtils.writeToFile(", -1", OUTPUT_FILE_PATH);
+            this.loop_aux_num2 = numValue;
         }
-        FileUtils.writeToFile(")", OUTPUT_FILE_PATH);
-        FileUtils.writeToFile(": \n", OUTPUT_FILE_PATH);
+
+        if(!desde_loop_flag){
+            this.loop_aux_num = this.loop_aux_num2;
+        }
+
+        if (ctx.getChild(1) != null && ctx.getChild(1) instanceof LatinoGrammarParser.Loop_opRelContext){
+            comparator_tkn = ctx.getChild(1).getChild(0).getText();
+        }
+
+        if(comparator_tkn.equals("<=")) {
+            numValue = Integer.parseInt(ctx.getChild(2).getText()) + 1;
+            this.loop_aux_num = numValue;
+        }else if(comparator_tkn.equals(">=")){
+            numValue = Integer.parseInt(ctx.getChild(2).getText()) - 1;
+            this.loop_aux_num = numValue;
+        } else{
+
+        }
+        if(desde_loop_flag && hasLoopAssignIncrDecr){
+            if(this.longitud_flag){
+                FileUtils.writeToFile("len("+this.id_longitud+")"+"", OUTPUT_FILE_PATH);
+            }else{
+                FileUtils.writeToFile(numValue+"", OUTPUT_FILE_PATH);
+            }
+
+            if(loop_aux_num2 > loop_aux_num3){
+                FileUtils.writeToFile(", 1", OUTPUT_FILE_PATH);
+            }else{
+                FileUtils.writeToFile(", -1", OUTPUT_FILE_PATH);
+            }
+            FileUtils.writeToFile(")", OUTPUT_FILE_PATH);
+            FileUtils.writeToFile(": \n", OUTPUT_FILE_PATH);
+        }else if(desde_loop_flag && !hasLoopAssignIncrDecr && this.desde_loop_flag_2){
+
+            if(loop_aux_num2 > loop_aux_num3){
+                if(this.longitud_flag){
+                    FileUtils.writeToFile("len("+this.id_longitud+")"+", "+ this.loop_assign_number+"): \n", OUTPUT_FILE_PATH);
+                    this.desde_loop_flag_2 = false;
+                }else{
+                    FileUtils.writeToFile(numValue+", "+ this.loop_assign_number+"): \n", OUTPUT_FILE_PATH);
+                    this.desde_loop_flag_2 = false;
+                }
+
+            }else{
+                FileUtils.writeToFile(numValue+", -"+ this.loop_assign_number+"): \n", OUTPUT_FILE_PATH);
+                this.desde_loop_flag_2 = false;
+            }
+
+        }
+
+        this.desde_loop_flag = true;
+    }
+
+    @Override public void enterTriple_expr(LatinoGrammarParser.Triple_exprContext ctx) {
+        this.hasLoopAssignIncrDecr = false;
+
+        // Iterar sobre todos los hijos del contexto actual
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            ParseTree child = ctx.getChild(i);
+
+            // Verificar si el hijo es de tipo loop_assignIncrDecrContext
+            if (child instanceof LatinoGrammarParser.Loop_assignIncrDecrContext) {
+                this.hasLoopAssignIncrDecr = true;
+                break; // Salir del bucle ya que hemos encontrado el nodo
+            }else{
+                Integer num = findNumNode(child);
+                if(num != null){
+
+                    this.loop_assign_number = num;
+                }
+            }
+        }
+    }
+
+    @Override public void exitTriple_expr(LatinoGrammarParser.Triple_exprContext ctx) {
+        this.desde_loop_flag = false;
+        this.longitud_flag = false;
+    }
+
+    //MIENTRAS
+
+    @Override public void enterMientras_loop(LatinoGrammarParser.Mientras_loopContext ctx) {
+        FileUtils.writeToFile("while ", OUTPUT_FILE_PATH);
+    }
+    @Override public void exitMientras_loop(LatinoGrammarParser.Mientras_loopContext ctx) {
     }
 
 
@@ -334,6 +467,42 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
         if(ctx.expRel() != null){
             FileUtils.writeToFile(" and ", OUTPUT_FILE_PATH);
         }
+    }
+
+    @Override public void enterLoop_assignIncrDecr(LatinoGrammarParser.Loop_assignIncrDecrContext ctx) {}
+
+    @Override public void enterAssignIncrDecr(LatinoGrammarParser.AssignIncrDecrContext ctx) {
+        if(ctx.TKN_DECREMENT() != null){
+            FileUtils.writeToFile(" -= 1", OUTPUT_FILE_PATH);
+        }else if (ctx.TKN_INCREMENT() != null){
+            FileUtils.writeToFile(" += 1", OUTPUT_FILE_PATH);
+        }
+    }
+
+    @Override public void enterBrakets(LatinoGrammarParser.BraketsContext ctx) {
+//        FileUtils.writeToFile("["+ctx.ID().getText()+"]", OUTPUT_FILE_PATH);
+    }
+
+
+    // Método para encontrar el valor de NUM recursivamente en los hijos
+    private Integer findNumNode(ParseTree node) {
+        // Verificar si el nodo es un TerminalNode y su tipo es NUM
+        if (node instanceof TerminalNode) {
+            TerminalNode terminalNode = (TerminalNode) node;
+            if (terminalNode.getSymbol().getType() == LatinoGrammarParser.NUM) {
+                return Integer.parseInt(terminalNode.getText());
+            }
+        }
+
+        // Recorrer los hijos recursivamente si no es un TerminalNode
+        for (int i = 0; i < node.getChildCount(); i++) {
+            Integer result = findNumNode(node.getChild(i));
+            if (result != null) {
+                return result;
+            }
+        }
+
+        return null;  // Retorna null si no se encuentra el nodo NUM
     }
 }
 

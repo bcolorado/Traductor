@@ -1,3 +1,10 @@
-desde (i = 0; i <= 10; i++)
-  escribir(i)
+carros = ["BMW", "Volvo", "Ford", "Nissan"]
+i = 0
+texto = ""
+
+mientras(i < lista.longitud(carros))
+  texto = texto..carros[i].."\n"
+i++
 fin
+
+escribir(texto)
