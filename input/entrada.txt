@@ -1,10 +1,6 @@
-carros = ["BMW", "Volvo", "Ford", "Nissan"]
-i = 0
-texto = ""
+i=0
 
-mientras(i < lista.longitud(carros))
-  texto = texto..carros[i].."\n"
-i++
-fin
-
-escribir(texto)
+repetir
+  escribir(i)
+  i++            //incrementamos el valor de i
+hasta i == 10

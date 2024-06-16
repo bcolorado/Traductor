@@ -52,7 +52,7 @@ array_content_aux: TKN_COMMA expr array_content_aux | ;
 // CONDICIONALES --------------------------------------------------------------------------
 conditionals: if_conditional | swicth_condition;
 //BUCLES ----------------------------------------------------------------------------------
-loops: desde_loop | mientras_loop;
+loops: desde_loop | mientras_loop | repetir_loop;
 
 // IF
 
@@ -88,6 +88,11 @@ romperOp:
     'romper'
     | ;  // epsilon is represented by an empty alternative
 
+
+//BUCLE REPETIR
+repetir_loop: 'repetir' loop_substatement repetir_aux 'hasta' expr repetir_aux2 ;
+repetir_aux:|;
+repetir_aux2:|;
 
 //BUCLE MIENTRAS
 mientras_loop: 'mientras' expr loop_substatement 'fin';

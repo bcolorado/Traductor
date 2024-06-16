@@ -467,6 +467,36 @@ public interface LatinoGrammarListener extends ParseTreeListener {
 	 */
 	void exitRomperOp(LatinoGrammarParser.RomperOpContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#repetir_loop}.
+	 * @param ctx the parse tree
+	 */
+	void enterRepetir_loop(LatinoGrammarParser.Repetir_loopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#repetir_loop}.
+	 * @param ctx the parse tree
+	 */
+	void exitRepetir_loop(LatinoGrammarParser.Repetir_loopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#repetir_aux}.
+	 * @param ctx the parse tree
+	 */
+	void enterRepetir_aux(LatinoGrammarParser.Repetir_auxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#repetir_aux}.
+	 * @param ctx the parse tree
+	 */
+	void exitRepetir_aux(LatinoGrammarParser.Repetir_auxContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LatinoGrammarParser#repetir_aux2}.
+	 * @param ctx the parse tree
+	 */
+	void enterRepetir_aux2(LatinoGrammarParser.Repetir_aux2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link LatinoGrammarParser#repetir_aux2}.
+	 * @param ctx the parse tree
+	 */
+	void exitRepetir_aux2(LatinoGrammarParser.Repetir_aux2Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link LatinoGrammarParser#mientras_loop}.
 	 * @param ctx the parse tree
 	 */

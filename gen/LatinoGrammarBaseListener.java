@@ -568,6 +568,42 @@ public class LatinoGrammarBaseListener implements LatinoGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterRepetir_loop(LatinoGrammarParser.Repetir_loopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRepetir_loop(LatinoGrammarParser.Repetir_loopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRepetir_aux(LatinoGrammarParser.Repetir_auxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRepetir_aux(LatinoGrammarParser.Repetir_auxContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRepetir_aux2(LatinoGrammarParser.Repetir_aux2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRepetir_aux2(LatinoGrammarParser.Repetir_aux2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMientras_loop(LatinoGrammarParser.Mientras_loopContext ctx) { }
 	/**
 	 * {@inheritDoc}

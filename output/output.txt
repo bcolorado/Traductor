@@ -1,7 +1,6 @@
-carros=["BMW","Volvo","Ford","Nissan"]"BMW""Volvo""Ford""Nissan"
 i=0
-texto=""
-while (i < len( carros)): 
-	texto=texto + carros[i] + "\n"
+while True: 
+	print(i)
 	i += 1
-print(texto)
+	if i == 10: 
+		break

@@ -2,6 +2,8 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.print.DocFlavor;
 
@@ -316,6 +318,33 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
     @Override public void exitMientras_loop(LatinoGrammarParser.Mientras_loopContext ctx) {
     }
 
+    //REPETIR
+    @Override public void enterRepetir_loop(LatinoGrammarParser.Repetir_loopContext ctx) {
+        FileUtils.writeToFile("while True: \n", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterExpRel(LatinoGrammarParser.ExpRelContext ctx) {
+//        List<String> leafValues = getLeafNodes(ctx);
+//
+//        StringBuilder output = new StringBuilder();
+//        output.append("while True:\n");
+//        for (String value : leafValues) {
+//            output.append("  # ").append(value).append("\n");  // Añadir el valor con el formato deseado
+//        }
+//
+//        System.out.println(output.toString());
+    }
+
+    @Override public void enterRepetir_aux(LatinoGrammarParser.Repetir_auxContext ctx) {
+        FileUtils.writeToFile("\t".repeat(identationLevel+1), OUTPUT_FILE_PATH);
+        FileUtils.writeToFile("if ", OUTPUT_FILE_PATH);
+    }
+
+    @Override public void enterRepetir_aux2(LatinoGrammarParser.Repetir_aux2Context ctx) {
+        FileUtils.writeToFile(": \n", OUTPUT_FILE_PATH);
+        FileUtils.writeToFile("\t".repeat(identationLevel+2)+"break", OUTPUT_FILE_PATH);
+    }
+
 
     // CONDICIONAL
 
@@ -503,6 +532,23 @@ public class TranslateListeners extends LatinoGrammarBaseListener {
         }
 
         return null;  // Retorna null si no se encuentra el nodo NUM
+    }
+
+
+    private List<String> getLeafNodes(ParseTree node) {
+        List<String> leaves = new ArrayList<>();
+
+        // Si el nodo no tiene hijos, es una hoja
+        if (node.getChildCount() == 0) {
+            leaves.add(node.getText());
+            return leaves;
+        }
+
+        // Si tiene hijos, recorrer cada uno recursivamente
+        for (int i = 0; i < node.getChildCount(); i++) {
+            leaves.addAll(getLeafNodes(node.getChild(i)));
+        }
+        return leaves;
     }
 }
 
